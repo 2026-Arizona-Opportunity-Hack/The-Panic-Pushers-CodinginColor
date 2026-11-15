@@ -1,0 +1,62 @@
+name: CI
+
+# Runs the full test suite (validation, sign-in and route permissions,
+# row-level security) against a throwaway Postgres on every pull request and
+# every push to main. It uses no repository secrets and never touches Neon.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_PASSWORD: ci-owner-pass
+          POSTGRES_DB: cic_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      # Throwaway credentials for the CI-only database above.
+      DATABASE_URL: postgres://postgres:ci-owner-pass@localhost:5432/cic_test
+      APP_DB_PASSWORD: ci-app-pass
+      APP_DATABASE_URL: postgres://cic_app:ci-app-pass@localhost:5432/cic_test
+      SEED_PASSWORD: ci-admin-password
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check security headers match vercel.json
+        run: npm run check:headers
+
+      - name: Create schema, roles and the restricted app role
+        run: npm run db:setup
+
+      - name: Run tests as the restricted app role
+        shell: bash
+        run: |
+          node --test --test-reporter=tap 'test/*.test.js' 2>&1 | tee test-output.txt
+          # A missing database variable would skip the database tests and
+          # still pass, so fail unless every test actually ran.
+          grep -q '^# skipped 0$' test-output.txt || { echo "::error::Some tests were skipped"; exit 1; }
+          grep -q '^# fail 0$' test-output.txt
