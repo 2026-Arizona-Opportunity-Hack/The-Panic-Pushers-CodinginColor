@@ -55,6 +55,9 @@ jobs:
       - name: Create schema, roles and the restricted app role
         run: npm run db:setup
 
+      - name: Load the demo curriculum (validates it like the API does)
+        run: npm run db:seed
+
       - name: Run tests as the restricted app role
         shell: bash
         run: |
