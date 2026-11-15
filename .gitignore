@@ -30,3 +30,6 @@ Thumbs.db
 
 # Built at deploy time from node_modules/pyodide
 public/pyodide/
+
+# Vercel CLI project link (local only)
+.vercel
