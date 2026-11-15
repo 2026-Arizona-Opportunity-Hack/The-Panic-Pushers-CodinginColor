@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/glass.css">
   <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/components-interactive.css">
   <link rel="stylesheet" href="/css/pages/styleguide.css">
   <script type="module" src="/js/pages/styleguide.js"></script>
 </head>
@@ -159,6 +160,41 @@
       </div>
       <pre><code>for i in range(1, 6):
     print(i)</code></pre>
+    </section>
+
+    <section class="glass card stack" aria-labelledby="h-interactive">
+      <h2 id="h-interactive">Dialogs, toasts, tabs and rings</h2>
+      <div class="cluster">
+        <button class="btn btn-secondary" type="button" id="open-modal">Open modal</button>
+        <button class="btn btn-secondary" type="button" id="open-drawer">Open student drawer</button>
+        <button class="btn btn-danger" type="button" id="open-confirm">Delete student…</button>
+        <button class="btn btn-secondary" type="button" id="toast-ok">Toast: saved</button>
+        <button class="btn btn-secondary" type="button" id="toast-bad">Toast: error</button>
+      </div>
+      <p class="muted text-sm" id="confirm-result" aria-live="polite"></p>
+
+      <div class="tabs" id="demo-tabs">
+        <div class="tablist" role="tablist" aria-label="Class views">
+          <button role="tab" type="button" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+          <button role="tab" type="button" id="tab-progress" aria-controls="panel-progress" aria-selected="false">Progress</button>
+          <button role="tab" type="button" id="tab-roster" aria-controls="panel-roster" aria-selected="false">Roster</button>
+        </div>
+        <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+          <div class="cluster" id="rings"></div>
+        </div>
+        <div role="tabpanel" id="panel-progress" aria-labelledby="tab-progress" tabindex="0" hidden>
+          <p>Student by activity heatmap goes here.</p>
+        </div>
+        <div role="tabpanel" id="panel-roster" aria-labelledby="tab-roster" tabindex="0" hidden>
+          <form class="stack" id="demo-form" novalidate>
+            <div class="field">
+              <label for="demo-name">Student name</label>
+              <input class="input" id="demo-name" data-field="Your name" value="Ana P">
+            </div>
+            <div class="cluster"><button class="btn btn-primary" type="submit">Add student</button></div>
+          </form>
+        </div>
+      </div>
     </section>
 
     <section class="glass card stack" aria-labelledby="h-icons">
