@@ -1,0 +1,112 @@
+/* Student join: pick your name, then PIN. Big targets for touch screens. */
+.join { padding-block: clamp(var(--space-5), 6vw, var(--space-7)); display: grid; justify-items: center; align-items: start; align-content: start; }
+.join-panel { width: min(960px, 100%); padding: clamp(var(--space-4), 3vw, var(--space-6)); }
+.join-narrow { width: min(440px, 100%); }
+.join-panel h1 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem); margin-top: var(--space-1); }
+
+.join-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+.join-search { position: relative; }
+.join-search .input { padding-left: 2.75rem; min-height: 54px; font-size: var(--text-lg); }
+.join-search-icon, .join-search > .icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+
+/* Name grid: one tap per student */
+.name-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr));
+}
+.name-btn {
+  display: flex; align-items: center; gap: var(--space-3);
+  width: 100%; min-height: 64px;
+  padding: var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit; font-weight: 700; font-size: var(--text-lg);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background-color 120ms ease;
+}
+.name-btn:hover { border-color: var(--primary); background: var(--accent-soft); transform: translateY(-1px); }
+.name-btn:active { transform: translateY(0); }
+.name-btn span:last-child { overflow-wrap: anywhere; }
+.name-skel { height: 64px; border-radius: var(--radius); }
+.join-skel-title { height: 2.2rem; width: min(320px, 70%); margin-block: var(--space-2) var(--space-5); }
+
+.join-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding-top: var(--space-4); border-top: 1px solid var(--line); }
+.join-back { align-self: flex-start; margin-left: calc(-1 * var(--space-2)); }
+
+.join-badge {
+  display: grid; place-items: center;
+  width: 52px; height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--cic-green-dark), var(--cic-green));
+  color: #FFFFFF;
+}
+.join-badge .icon { width: 28px; height: 28px; }
+.join-badge-warn { background: var(--warn-soft); color: var(--warn); }
+
+/* PIN */
+.pin-who { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-1); }
+.avatar-lg { width: 72px; height: 72px; font-size: var(--text-xl); margin-bottom: var(--space-2); }
+
+.pin-field { position: relative; align-items: center; }
+/* The real input sits on top of the dots, transparent, so typing, pasting,
+   password managers and screen readers all work on a normal field. */
+.pin-input {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  font-size: 16px; /* stops iOS zooming in */
+  cursor: text;
+}
+.pin-dots { display: flex; justify-content: center; gap: var(--space-4); padding: var(--space-3); border-radius: var(--radius); }
+.pin-input:focus-visible + .pin-dots { outline: 3px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 7px var(--focus-glow); }
+.pin-dots span {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--line-strong);
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+.pin-dots span.on { background: var(--primary); border-color: var(--primary); transform: scale(1.08); }
+.pin-field.bad .pin-dots span { border-color: var(--bad); }
+.pin-field.bad .pin-dots { animation: pin-shake 360ms ease; }
+@keyframes pin-shake {
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.pin-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+.pin-key {
+  min-height: 64px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit; font-size: var(--text-2xl); font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  touch-action: manipulation;
+  display: grid; place-items: center;
+}
+.pin-key:hover { border-color: var(--primary); }
+.pin-key:active { background: var(--accent-soft); }
+.pin-key-alt { font-size: var(--text-sm); color: var(--text-muted); }
+.pin-key:disabled { opacity: 0.5; cursor: not-allowed; }
+.join-forgot { text-align: center; }
+
+/* Late joiner PIN, shown once */
+.pin-reveal {
+  font-family: var(--font-mono);
+  font-size: clamp(2.6rem, 2rem + 4vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  text-align: center;
+  padding: var(--space-4) 0 var(--space-4) 0.35em;
+  border-radius: var(--radius);
+  background: var(--surface-sunken);
+  color: var(--heading);
+}
+.input-lg { min-height: 54px; font-size: var(--text-lg); }
+.join-panel h1:focus { outline: none; box-shadow: none; }
