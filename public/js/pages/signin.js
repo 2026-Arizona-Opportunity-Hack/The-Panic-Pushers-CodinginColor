@@ -2,7 +2,7 @@
 import { $ } from '../ui/html.js';
 import { fillIcons } from '../ui/icons.js';
 import { renderShell } from '../ui/shell.js';
-import { setBusy, showFieldErrors, clearFieldErrors } from '../ui/components.js';
+import { setBusy, showFieldErrors, clearFieldErrors, toast } from '../ui/components.js';
 import { api, me } from '../ui/api.js';
 
 fillIcons();
@@ -58,6 +58,24 @@ form.addEventListener('submit', async (e) => {
     password.focus();
   }
 });
+
+// Demo access: the server only returns logins when it's switched on.
+api.get('auth/demo').then((demo) => {
+  if (!demo?.enabled) return;
+  const { staff, student } = demo;
+  $('#demo-staff-meta').textContent = `${staff.email} · password ${staff.password}`;
+  $('#demo-student-meta').textContent = `Class code ${student.code} · any name · PIN ${student.pin}`;
+  $('#demo-student').href = `/join.html?code=${encodeURIComponent(student.code)}`;
+  $('#demo-staff').addEventListener('click', () => {
+    clearFieldErrors(form);
+    formError.hidden = true;
+    $('#email').value = staff.email;
+    password.value = staff.password;
+    form.querySelector('button[type="submit"]').focus(); // one more press signs in
+    toast('Judge login filled in. Press Sign in.', { type: 'ok' });
+  });
+  $('#demo').hidden = false;
+}).catch(() => {});
 
 const who = await renderShell();
 if (who.kind === 'staff') location.replace(next);
