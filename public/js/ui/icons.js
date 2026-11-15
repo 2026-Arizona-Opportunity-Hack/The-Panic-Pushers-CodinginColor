@@ -54,6 +54,19 @@ const PATHS = {
 
 export const iconNames = Object.keys(PATHS);
 
+/**
+ * Fill [data-icon="name"] placeholders in static HTML. A bare <span data-icon>
+ * (no text, no class) becomes the icon; anything else gets it prepended.
+ * data-icon-label gives the icon an accessible name.
+ */
+export function fillIcons(root = document) {
+  for (const el of root.querySelectorAll('[data-icon]')) {
+    const svg = String(icon(el.dataset.icon, { label: el.dataset.iconLabel }));
+    if (el.tagName === 'SPAN' && !el.className && !el.textContent.trim()) el.outerHTML = svg;
+    else el.insertAdjacentHTML('afterbegin', svg);
+  }
+}
+
 export function icon(name, { label = null, className = '' } = {}) {
   const body = PATHS[name] ?? PATHS.info;
   const a11y = label ? `role="img" aria-label="${escapeHtml(label)}"` : 'aria-hidden="true" focusable="false"';

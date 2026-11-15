@@ -4,25 +4,76 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CIC Classroom · Coding in Color</title>
-  <meta name="description" content="Coding in Color's curriculum and student progress platform.">
+  <meta name="description" content="Coding in Color's classroom: students learn computer science at their own pace from a class code; teachers see progress and learning gain.">
   <meta name="theme-color" content="#007A3D">
+  <script src="/js/boot.js"></script>
   <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/glass.css">
-  <link rel="stylesheet" href="/css/pages/placeholder.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/components-interactive.css">
+  <link rel="stylesheet" href="/css/shell.css">
+  <link rel="stylesheet" href="/css/pages/landing.css">
+  <script type="module" src="/js/pages/landing.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <main id="main" class="placeholder">
-    <section class="glass placeholder-card" aria-labelledby="title">
-      <p class="eyebrow">Coding in Color</p>
-      <h1 id="title">CIC Classroom</h1>
-      <p class="lead">Hand students a link. The platform teaches. Instructors see who's stuck, and CIC sees what students learned.</p>
-      <div class="swatches" aria-hidden="true">
-        <span class="swatch s-dark"></span><span class="swatch s-green"></span><span class="swatch s-tint"></span><span class="swatch s-sun"></span>
+  <main id="main" tabindex="-1">
+    <section class="container hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Coding in Color · Classroom</p>
+        <h1 id="hero-title">Learn to code at your own pace. <span class="hero-accent">Nobody falls behind.</span></h1>
+        <p class="hero-lead">Short videos, quick checks and real Python, right in your browser. Your teacher sees where you are, and you pick up exactly where you left off.</p>
+        <ul class="hero-points">
+          <li><span data-icon="check-circle"></span>No email or account. Just a class code.</li>
+          <li><span data-icon="code"></span>Python runs in the browser, even on a Chromebook.</li>
+          <li><span data-icon="lightbulb"></span>Hints ask you questions. They never give away the answer.</li>
+        </ul>
       </div>
-      <p class="muted text-sm">The full interface is being built. Check the service at <a href="/api/health">/api/health</a>.</p>
+
+      <form class="glass-strong join-card stack" id="join-form" novalidate aria-labelledby="join-title">
+        <span class="join-badge" data-icon="graduation-cap"></span>
+        <h2 id="join-title">I'm a student</h2>
+        <div class="field">
+          <label for="class-code">Class code</label>
+          <input class="input input-code" id="class-code" name="code" data-field="Class code" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" placeholder="K7M2QP" aria-describedby="code-hint" required>
+          <p class="hint" id="code-hint">6 letters and numbers. Your teacher has it on the board.</p>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Join my class <span data-icon="arrow-right"></span></button>
+      </form>
+    </section>
+
+    <section class="container paths" aria-label="Other ways in">
+      <a class="glass card interactive path" href="/signin.html">
+        <span class="path-icon" data-icon="users"></span>
+        <span class="path-text"><strong>I teach</strong><span>Set up a class in minutes, share a code, and see who's stuck.</span></span>
+        <span data-icon="chevron-right"></span>
+      </a>
+      <a class="glass card interactive path" href="/signin.html?as=reviewer">
+        <span class="path-icon" data-icon="book"></span>
+        <span class="path-text"><strong>Explore the curriculum</strong><span>For district and K12 reviewers: read-only access to every module.</span></span>
+        <span data-icon="chevron-right"></span>
+      </a>
+    </section>
+
+    <section class="container how" aria-labelledby="how-title">
+      <h2 id="how-title">How a module works</h2>
+      <ol class="how-steps">
+        <li class="glass card"><span class="how-num">1</span><h3>Quick pretest</h3><p>A few questions so you and your teacher know where you're starting.</p></li>
+        <li class="glass card"><span class="how-num">2</span><h3>Watch, then check</h3><p>A short video or slides, then one question to make sure it clicked.</p></li>
+        <li class="glass card"><span class="how-num">3</span><h3>Practice in Python</h3><p>Write and run real code. Stuck? Ask for a hint.</p></li>
+        <li class="glass card"><span class="how-num">4</span><h3>Exit ticket and post-test</h3><p>Show what you learned, and the next module unlocks.</p></li>
+      </ol>
+    </section>
+
+    <section class="container impact glass card" aria-labelledby="impact-title">
+      <h2 id="impact-title">Built for Coding in Color</h2>
+      <p>Coding in Color brings computer science and AI to Arizona high schoolers whose schools don't offer it: AI Academy cohorts at Desert Edge, Maryvale and Salt River, year-long programs, summer camps and Day of Compute. This classroom turns those lessons into something any teacher can run from a link, and shows how much students actually learned.</p>
+      <dl class="impact-stats">
+        <div><dt>Students at Day of Compute</dt><dd>140+</dd></div>
+        <div><dt>AI Academy partner schools</dt><dd>3</dd></div>
+        <div><dt>Accounts a student needs</dt><dd>0</dd></div>
+      </dl>
     </section>
   </main>
 </body>

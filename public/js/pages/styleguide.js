@@ -1,15 +1,9 @@
 // Style guide page: fills in icons and wires the theme / contrast switches.
 import { html, render, $, $$ } from '../ui/html.js';
-import { icon, iconNames } from '../ui/icons.js';
+import { icon, iconNames, fillIcons } from '../ui/icons.js';
 import { createDialog, openDialog, confirmDialog, toast, initToasts, initTabs, progressRing, showFieldErrors } from '../ui/components.js';
 
-// [data-icon] placeholders get an inline SVG. A bare <span data-icon> (no text,
-// no class) is replaced by the icon; anything else keeps its content after it.
-for (const el of $$('[data-icon]')) {
-  const svg = String(icon(el.dataset.icon, { label: el.dataset.iconLabel }));
-  if (el.tagName === 'SPAN' && !el.className && !el.textContent.trim()) el.outerHTML = svg;
-  else el.insertAdjacentHTML('afterbegin', svg);
-}
+fillIcons();
 
 render($('#icon-list'), html`${iconNames.map((name) => html`<li>${icon(name)}<span>${name}</span></li>`)}`);
 
