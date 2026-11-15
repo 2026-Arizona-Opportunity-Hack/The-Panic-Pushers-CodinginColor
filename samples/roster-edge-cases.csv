@@ -1,0 +1,26 @@
+﻿First Name,Last Name,Student ID,Grade,Notes
+Maria,Garcia,25001,9,
+maria,gonzalez,25002,9,same first name and last initial as row 2
+  José ,  Hernández ,25003,10,extra spaces and accents
+D'Andre,Williams-Brown,25004,11,apostrophe and hyphen
+,,,,
+,Nguyen,25005,9,missing first name
+Kai,,25006,10,no last name
+Anh,Nguyen,25007,9,
+Anh,Nguyen,25007,9,exact duplicate of the row above
+Luis,"Lopez, Jr.",25008,12,quoted comma in the last name
+Zoë,O'Neil,25009,10,
+MARCUS,JOHNSON,25010,10,typed in capitals
+Sam,Lee,25011,9,
+Sam,Li,25012,9,same short name as the row above
+Mia,Chen 🎮,25013,9,emoji in the last name
+Robert'); DROP TABLE students;--,Smith,25014,9,SQL injection attempt
+<script>alert(1)</script>,Xavier,25015,9,HTML injection attempt
+Maximiliano-Alejandro Esteban Bartholomew Montgomery-Villalobos,Q,25016,11,first name over 60 characters
+Aaliyah,Brown,25017,9,already in class PHX234 as Aaliyah B.
+"Destiny ""DJ""",Jones,25018,10,nickname in escaped quotes
+	Tran	,Pham,25019,9,tab characters around the name
+Ana Sofía,Ruiz,25020,9,two-word first name
+Ana Sofía,Ruiz,25020,9,duplicate again
+Leilani,Kahale,,9,no student ID
+Omar,Haddad,25022,9,last line has no line ending

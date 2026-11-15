@@ -2,7 +2,8 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { dbOpts, startServer, client } from './helpers.js';
-import { demoClass } from '../db/demo-class.js';
+import { demoClasses } from '../db/demo-classes.js';
+const demoClass = demoClasses[0];
 
 let srv, anon;
 
