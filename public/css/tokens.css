@@ -13,7 +13,8 @@
  */
 
 :root {
-  color-scheme: light dark;
+  /* Dark by default, matching the landing page. Viewers can pick Light in Display settings. */
+  color-scheme: dark;
 
   /* ---- Brand constants (fixed in both themes) ---- */
   --cic-green: #00A850;
@@ -22,10 +23,10 @@
   --cic-gray: #595959;
 
   /* ---- Page: off-white with drifting orbs of light (CIC green first) ---- */
-  --bg: light-dark(#F4F6F5, #0B0E0D);
-  --orb-1: light-dark(rgba(0, 168, 80, 0.10), rgba(0, 168, 80, 0.16));      /* CIC green */
-  --orb-2: light-dark(rgba(0, 150, 120, 0.08), rgba(0, 140, 110, 0.10));     /* a cooler green */
-  --orb-3: light-dark(rgba(0, 122, 61, 0.08), rgba(0, 122, 61, 0.12));       /* CIC dark green */
+  --bg: light-dark(#F4F6F5, #000000);
+  --orb-1: light-dark(rgba(0, 168, 80, 0.10), rgba(0, 122, 61, 0.34));      /* CIC green */
+  --orb-2: light-dark(rgba(0, 150, 120, 0.08), rgba(0, 122, 61, 0.20));     /* a cooler green */
+  --orb-3: light-dark(rgba(0, 122, 61, 0.08), rgba(0, 168, 80, 0.10));       /* CIC dark green */
   /* What text can end up over: the contrast check mixes these into the page. */
   --aurora-1: var(--orb-1);
   --aurora-2: var(--orb-2);
@@ -49,23 +50,23 @@
   --line-strong: light-dark(rgba(20, 24, 31, 0.22), rgba(255, 255, 255, 0.26));
 
   /* ---- Text: neutral body; headings in CIC Dark Green (brand guide section 4) ---- */
-  --text: light-dark(#17181B, #F2F3F5);
-  --text-muted: light-dark(#484C53, #BCC1C8);
-  --heading: light-dark(#007A3D, #9BE5BD);
-  --link: light-dark(#005A2D, #8FE0B5);
+  --text: light-dark(#17181B, #FFFFFF);
+  --text-muted: light-dark(#484C53, #C8C8C8);
+  --heading: light-dark(#007A3D, #FFFFFF);
+  --link: light-dark(#005A2D, #FFFFFF);
   --code-text: light-dark(#17181B, #E6E9ED);
   --code-bg: light-dark(rgba(20, 24, 31, 0.05), rgba(0, 0, 0, 0.35));
 
   /* ---- Actions: CIC green is the single accent ---- */
-  --primary: light-dark(#007A3D, #3CCB82);
-  --primary-hover: light-dark(#00672F, #5AD897);
-  --on-primary: light-dark(#FFFFFF, #06130C);
-  --accent: light-dark(#2FB574, #3CCB82);          /* fills only: progress, rings, dots */
-  --accent-soft: light-dark(#E3F5EB, rgba(60, 203, 130, 0.14));
+  --primary: light-dark(#007A3D, #00A850);
+  --primary-hover: light-dark(#00672F, #FFFFFF);
+  --on-primary: light-dark(#FFFFFF, #000000);
+  --accent: light-dark(#2FB574, #00A850);          /* fills only: progress, rings, dots */
+  --accent-soft: light-dark(#E3F5EB, rgba(0, 122, 61, 0.32));
 
   /* ---- Status (text-safe on surfaces), with pastel fills ---- */
-  --ok: light-dark(#175633, #8EE6B2);
-  --ok-soft: light-dark(#E2F5EA, rgba(127, 220, 166, 0.10));
+  --ok: light-dark(#175633, #E6F4ED);
+  --ok-soft: light-dark(#E2F5EA, rgba(0, 122, 61, 0.34));
   --warn: light-dark(#6E4200, #FFC861);
   --warn-soft: light-dark(#FFF2DB, rgba(255, 200, 97, 0.12));
   --bad: light-dark(#8C1D17, #FFB4AC);
@@ -75,7 +76,7 @@
 
   /* ---- Focus: dark ring + soft mint glow, visible on every surface ---- */
   --focus-ring: light-dark(#0B3D24, #FFFFFF);
-  --focus-glow: light-dark(rgba(47, 181, 116, 0.35), rgba(60, 203, 130, 0.45));
+  --focus-glow: light-dark(rgba(47, 181, 116, 0.35), rgba(0, 168, 80, 0.45));
 
   /* ---- Shape and depth: generous radii, soft diffuse shadows ---- */
   --radius-sm: 12px;
