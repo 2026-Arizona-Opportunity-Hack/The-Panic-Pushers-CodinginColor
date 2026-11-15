@@ -27,3 +27,6 @@ target/
 .DS_Store
 Thumbs.db
 *.log
+
+# Built at deploy time from node_modules/pyodide
+public/pyodide/
