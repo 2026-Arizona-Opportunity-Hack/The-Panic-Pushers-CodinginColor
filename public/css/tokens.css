@@ -1,4 +1,4 @@
-/* CIC Glass: design tokens.
+/* CIC Glass: design tokens. Minimal, pastel, frosted glass.
  *
  * Brand source: Coding in Color brand guidelines, section 7.
  *   CIC_DARK_GREEN    #007A3D  headings, links, primary buttons (the workhorse)
@@ -35,62 +35,67 @@
   --cic-green-dark: #007A3D;
   --cic-tint: #E6F4ED;
   --cic-gray: #595959;
-  --sun: #FFB703;
 
-  /* ---- Page ---- */
-  --bg: light-dark(#F8FBF9, #06140D);
-  --aurora-1: light-dark(rgba(0, 168, 80, 0.12), rgba(0, 168, 80, 0.22));
-  --aurora-2: light-dark(rgba(31, 170, 160, 0.13), rgba(20, 120, 112, 0.24));
-  --aurora-3: light-dark(rgba(255, 183, 3, 0.14), rgba(255, 183, 3, 0.08));
-  --aurora-4: light-dark(rgba(0, 122, 61, 0.08), rgba(0, 122, 61, 0.30));
+  /* ---- Page: a calm off-white with soft pastel light behind the glass ---- */
+  --bg: light-dark(#F5F6F8, #0E0F12);
+  --aurora-1: light-dark(rgba(178, 236, 205, 0.55), rgba(64, 170, 120, 0.16));   /* mint */
+  --aurora-2: light-dark(rgba(206, 198, 250, 0.45), rgba(130, 110, 220, 0.14));  /* lavender */
+  --aurora-3: light-dark(rgba(255, 214, 190, 0.45), rgba(230, 140, 100, 0.08));  /* peach */
+  --aurora-4: light-dark(rgba(188, 220, 255, 0.50), rgba(80, 140, 230, 0.12));   /* sky */
 
-  /* ---- Glass surfaces ---- */
-  --surface: light-dark(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.07));
-  --surface-strong: light-dark(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.11));
-  --surface-solid: light-dark(#FFFFFF, #10211A);
-  --surface-sunken: light-dark(rgba(0, 58, 29, 0.05), rgba(0, 0, 0, 0.25));
-  --glass-border: light-dark(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.12));
-  --glass-highlight: light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.08));
-  --glass-blur: 18px;
-  --line: light-dark(rgba(0, 58, 29, 0.14), rgba(255, 255, 255, 0.14));
-  --line-strong: light-dark(rgba(0, 58, 29, 0.32), rgba(255, 255, 255, 0.32));
+  /* ---- Glass surfaces: frosted white, hairline edges ---- */
+  --surface: light-dark(rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.06));
+  --surface-strong: light-dark(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.09));
+  --surface-solid: light-dark(#FFFFFF, #1A1C20);
+  --surface-sunken: light-dark(rgba(20, 24, 31, 0.04), rgba(0, 0, 0, 0.28));
+  --glass-border: light-dark(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.10));
+  --glass-highlight: light-dark(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.06));
+  --glass-blur: 28px;
+  --line: light-dark(rgba(20, 24, 31, 0.09), rgba(255, 255, 255, 0.10));
+  --line-strong: light-dark(rgba(20, 24, 31, 0.22), rgba(255, 255, 255, 0.26));
 
-  /* ---- Text ---- */
-  --text: light-dark(#0B1F14, #EAF5EE);
-  --text-muted: light-dark(#46524B, #A9BDB2);
-  --heading: light-dark(#007A3D, #EAF5EE);
-  --link: light-dark(#006B35, #8FE3B6);
-  --code-text: light-dark(#0B1F14, #DDEFE5);
-  --code-bg: light-dark(rgba(0, 58, 29, 0.07), rgba(0, 0, 0, 0.35));
+  /* ---- Text: neutral, so the pastels and the one green accent carry the colour ---- */
+  --text: light-dark(#17181B, #F2F3F5);
+  --text-muted: light-dark(#575B62, #A7ACB4);
+  --heading: light-dark(#17181B, #F2F3F5);
+  --link: light-dark(#006E38, #8FE0B5);
+  --code-text: light-dark(#17181B, #E6E9ED);
+  --code-bg: light-dark(rgba(20, 24, 31, 0.05), rgba(0, 0, 0, 0.35));
 
-  /* ---- Actions ---- */
-  --primary: light-dark(#007A3D, #00A850);
-  --primary-hover: light-dark(#00602F, #19C26A);
-  --on-primary: light-dark(#FFFFFF, #04130B);
-  --accent: var(--cic-green);                       /* fills only: progress, success dots */
-  --accent-soft: light-dark(#E6F4ED, rgba(0, 168, 80, 0.16));
+  /* ---- Actions: CIC green is the single accent ---- */
+  --primary: light-dark(#007A3D, #3CCB82);
+  --primary-hover: light-dark(#00672F, #5AD897);
+  --on-primary: light-dark(#FFFFFF, #06130C);
+  --accent: light-dark(#2FB574, #3CCB82);          /* fills only: progress, rings, dots */
+  --accent-soft: light-dark(#E3F5EB, rgba(60, 203, 130, 0.14));
+  --lilac-soft: light-dark(#EEEAFD, rgba(150, 130, 240, 0.14));
+  --peach-soft: light-dark(#FFEDE3, rgba(240, 150, 110, 0.12));
+  --sky-soft: light-dark(#E6F1FE, rgba(110, 160, 240, 0.14));
 
-  /* ---- Status (text-safe on surfaces) ---- */
-  --ok: light-dark(#1D6B3A, #8EE6B2);
-  --ok-soft: light-dark(#E3F4E8, rgba(127, 220, 166, 0.10));
+  /* ---- Status (text-safe on surfaces), with pastel fills ---- */
+  --ok: light-dark(#1E6B40, #8EE6B2);
+  --ok-soft: light-dark(#E2F5EA, rgba(127, 220, 166, 0.10));
   --warn: light-dark(#8A5300, #FFC861);
-  --warn-soft: light-dark(#FFF3D6, rgba(255, 200, 97, 0.14));
-  --bad: light-dark(#A3221B, #FFB4AC);
-  --bad-soft: light-dark(#FDE8E6, rgba(255, 155, 145, 0.10));
-  --info: light-dark(#1F5FAD, #B0D0FF);
-  --info-soft: light-dark(#E7F0FC, rgba(156, 196, 255, 0.10));
+  --warn-soft: light-dark(#FFF2DB, rgba(255, 200, 97, 0.12));
+  --bad: light-dark(#A3241D, #FFB4AC);
+  --bad-soft: light-dark(#FDE9EA, rgba(255, 155, 145, 0.10));
+  --info: light-dark(#1F5BA8, #B0D0FF);
+  --info-soft: light-dark(#E6EFFD, rgba(156, 196, 255, 0.10));
 
-  /* ---- Focus: dark ring + sun glow, visible on every surface ---- */
-  --focus-ring: light-dark(#003D1F, #FFFFFF);
-  --focus-glow: rgba(255, 183, 3, 0.65);
+  /* ---- Focus: dark ring + soft mint glow, visible on every surface ---- */
+  --focus-ring: light-dark(#0B3D24, #FFFFFF);
+  --focus-glow: light-dark(rgba(47, 181, 116, 0.35), rgba(60, 203, 130, 0.45));
 
-  /* ---- Shape and depth ---- */
-  --radius-sm: 10px;
-  --radius: 16px;
-  --radius-lg: 22px;
+  /* ---- Shape and depth: generous radii, soft diffuse shadows ---- */
+  --radius-sm: 12px;
+  --radius: 18px;
+  --radius-lg: 26px;
   --radius-pill: 999px;
-  --shadow: light-dark(0 12px 32px -14px rgba(0, 58, 29, 0.28), 0 14px 36px -12px rgba(0, 0, 0, 0.6));
-  --shadow-lg: light-dark(0 24px 60px -20px rgba(0, 58, 29, 0.35), 0 28px 64px -18px rgba(0, 0, 0, 0.7));
+  /* light-dark() only takes colours, so shadows are built from colour tokens. */
+  --shadow-near: light-dark(rgba(16, 24, 40, 0.05), rgba(0, 0, 0, 0.40));
+  --shadow-far: light-dark(rgba(16, 24, 40, 0.10), rgba(0, 0, 0, 0.55));
+  --shadow: 0 1px 2px var(--shadow-near), 0 12px 32px -12px var(--shadow-far);
+  --shadow-lg: 0 2px 4px var(--shadow-near), 0 24px 56px -16px var(--shadow-far);
 
   /* ---- Spacing (4px grid) ---- */
   --space-1: 0.25rem;

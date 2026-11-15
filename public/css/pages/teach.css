@@ -55,8 +55,8 @@
 .gain-bars { display: grid; gap: 4px; }
 .gain-bar { display: block; height: 8px; border-radius: var(--radius-pill); background: var(--surface-sunken); overflow: hidden; }
 .gain-bar span { display: block; height: 100%; border-radius: inherit; }
-.gain-pre span, .key-pre { background: var(--text-muted); }
-.gain-post span, .key-post { background: linear-gradient(90deg, var(--cic-green-dark), var(--cic-green)); }
+.gain-pre span, .key-pre { background: light-dark(#C9C3F2, rgba(170, 150, 250, 0.55)); }
+.gain-post span, .key-post { background: var(--accent); }
 .gain-num { display: grid; justify-items: end; font-size: var(--text-sm); }
 .gain-num strong { font-size: var(--text-lg); }
 .gain-up { color: var(--heading); }

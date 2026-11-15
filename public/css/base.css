@@ -33,7 +33,7 @@ body::before {
     radial-gradient(36vmax 30vmax at 88% 12%, var(--aurora-2), transparent 70%),
     radial-gradient(30vmax 26vmax at 78% 82%, var(--aurora-3), transparent 70%),
     radial-gradient(42vmax 36vmax at 20% 88%, var(--aurora-4), transparent 70%);
-  animation: aurora-drift 38s var(--ease) infinite alternate;
+  animation: aurora-drift 60s var(--ease) infinite alternate;
 }
 @keyframes aurora-drift {
   from { transform: translate3d(0, 0, 0) rotate(0deg); }
@@ -43,9 +43,9 @@ body::before {
 /* ---- Typography ---- */
 h1, h2, h3, h4 {
   color: var(--heading);
-  font-weight: 750;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 h1 { font-size: var(--text-3xl); }
@@ -86,7 +86,7 @@ pre code { background: none; padding: 0; }
 img, svg, video, canvas { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; color: inherit; }
 hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-5) 0; }
-::selection { background: rgba(255, 183, 3, 0.45); color: var(--text); }
+::selection { background: light-dark(#CDEFDC, rgba(60, 203, 130, 0.35)); color: var(--text); }
 
 /* ---- Focus: always visible, never color-only ---- */
 :focus { outline: none; }

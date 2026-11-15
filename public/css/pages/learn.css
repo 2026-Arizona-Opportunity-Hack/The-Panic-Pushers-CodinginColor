@@ -34,7 +34,7 @@ a.journey-card:hover { transform: translateY(-2px); border-color: var(--primary)
 }
 .is-done .journey-dot { background: var(--accent-soft); color: var(--heading); border-color: var(--primary); }
 .is-current .journey-dot {
-  background: linear-gradient(135deg, var(--cic-green-dark), var(--cic-green)); color: #FFFFFF; border-color: transparent;
+  background: var(--primary); color: var(--on-primary); border-color: transparent;
   box-shadow: 0 0 0 6px var(--accent-soft);
 }
 .is-current .journey-card { border-color: var(--primary); }
@@ -54,3 +54,6 @@ a.journey-card:hover { transform: translateY(-2px); border-color: var(--primary)
   .journey-meta { grid-template-columns: 1fr; }
   .journey-why { display: none; }
 }
+
+/* Pastel accents per state, kept quiet. */
+.is-locked .journey-dot { background: var(--surface-sunken); }

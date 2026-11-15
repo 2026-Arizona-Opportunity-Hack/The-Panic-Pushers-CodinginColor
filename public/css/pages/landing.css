@@ -19,9 +19,8 @@
   display: grid; place-items: center;
   width: 52px; height: 52px;
   border-radius: 16px;
-  background: linear-gradient(135deg, var(--cic-green-dark), var(--cic-green));
-  color: #FFFFFF;
-  box-shadow: 0 10px 24px -10px rgba(0, 122, 61, 0.8);
+  background: var(--accent-soft);
+  color: var(--link);
 }
 .join-badge .icon { width: 28px; height: 28px; }
 .join-card .input-code { font-size: var(--text-2xl); min-height: 60px; }
@@ -58,3 +57,9 @@
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; }
 }
+
+/* Each step gets its own pastel, with dark text for contrast. */
+.how-num { background: var(--accent-soft); color: var(--text); }
+.how-steps li:nth-child(2) .how-num { background: var(--lilac-soft); }
+.how-steps li:nth-child(3) .how-num { background: var(--sky-soft); }
+.how-steps li:nth-child(4) .how-num { background: var(--peach-soft); }
