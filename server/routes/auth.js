@@ -4,6 +4,7 @@ import { createSession, sessionCookie, recordFailure, isLocked, COOKIE, SESSION_
 import { hashSecret, verifySecret, sha256, newPin } from '../secrets.js';
 import { HttpError, bad, notFound, parseCookies } from '../http.js';
 import * as v from '../validate.js';
+import { JUDGE } from '../../db/demo-judge.js';
 
 // Verify against a throwaway hash when the email is unknown, so response time
 // does not reveal which emails have accounts.
@@ -55,6 +56,18 @@ export default function register(route) {
       return { kind: 'student', student: principal.student, class_name: cls?.name ?? null, csrf: principal.csrf };
     }
     return { kind: null };
+  });
+
+  // Demo access for judges: the sign-in page shows these as one-click logins.
+  // Returns nothing unless DEMO_JUDGE_PASSWORD is set on the server.
+  route('GET', 'auth/demo', { auth: 'public', db: false }, async () => {
+    const password = process.env.DEMO_JUDGE_PASSWORD;
+    if (!password) return { enabled: false };
+    return {
+      enabled: true,
+      staff: { label: 'Judge (sees every class)', email: JUDGE.email, password },
+      student: { code: process.env.DEMO_CLASS_CODE || 'PHX234', pin: process.env.DEMO_PIN || '1234' },
+    };
   });
 
   // ----- Students: class join page (like a code.org class link) -----

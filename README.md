@@ -8,7 +8,7 @@ Built by **The Panic Pushers** at [ASU Fall Hackathon 2026 | Phoenix Hackathon f
 |---|---|
 | **Live demo** | **https://codingincolor.vercel.app** |
 | **Demo video** | _video link goes here_ |
-| **Try it** | Class code **`PHX234`**, any name, PIN **`1234`** (see [Demo logins](#demo-logins)) |
+| **Try it** | Judges: open **Sign in** and press **Fill in the judge login** (`judge@demo.codingincolor.test` / `Newuserdemo`). Students: class code **`PHX234`**, any name, PIN **`1234`** |
 
 <table><tr>
 <td><img src="docs/screenshots/join.jpg" alt="Join page: the class name and a grid of student names to tap"></td>
@@ -58,13 +58,14 @@ Coding in Color teaches Arizona high school students (ages 14 to 18) in partner 
 
 | Who | How to sign in | Where to look |
 |---|---|---|
+| **Judge (demo)** | `/signin.html` → **Fill in the judge login** → Sign in. `judge@demo.codingincolor.test` / `Newuserdemo`. No sign-up or approval needed | Sees every class; **Classes → Story Lab · Period 5** shows every case. No admin screens |
 | **Student** | Go to `/`, enter class code **`PHX234`**, tap a name, PIN **`1234`** | Try **Destiny J.** (not started) or **Imani K.** (stuck) |
 | **Instructor** | `/signin.html` as `instructor@demo.codingincolor.test`, password from `DEMO_STAFF_PASSWORD` | **Classes → Story Lab · Period 5** shows every case |
 | **CIC admin** | `/signin.html` as `admin@codingincolor.net`, password from `SEED_PASSWORD` | Sees every class, including the archived one |
 
 Other class codes: **`SPK7QR`** (AI Academy, Data & AI and Story Generator), **`STR9KM`** (closed class: no self-join, one locked-out student). `SUM26X` is archived, so it can't be joined.
 
-> Judges: ask the team in Slack for the demo instructor password. It's never committed.
+> Demo access is switched on by `DEMO_JUDGE_PASSWORD` on the server and seeded by `npm run db:seed`. Unset it and the sign-in panel disappears. The judge account can't manage staff, roles or settings.
 
 ## Run it locally
 

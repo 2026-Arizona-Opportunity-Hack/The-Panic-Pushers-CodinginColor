@@ -41,6 +41,21 @@
       <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
       <p class="auth-alt"><span data-icon="graduation-cap"></span><span>Student? You don't need a password. <a href="/">Use your class code</a>.</span></p>
     </form>
+
+    <!-- Shown only when the server has demo access switched on (DEMO_JUDGE_PASSWORD). -->
+    <section class="glass auth-card demo-card stack-sm" id="demo" aria-labelledby="demo-title" hidden>
+      <div>
+        <p class="eyebrow">Judges and reviewers</p>
+        <h2 id="demo-title">Try it with a demo account</h2>
+        <p class="muted text-sm">No sign-up or approval needed. Everything here is made-up demo data.</p>
+      </div>
+      <button class="btn btn-secondary btn-block demo-btn" type="button" id="demo-staff">
+        <span data-icon="users"></span><span class="demo-btn-text"><strong>Fill in the judge login</strong><span id="demo-staff-meta"></span></span>
+      </button>
+      <a class="btn btn-secondary btn-block demo-btn" id="demo-student" href="/join.html">
+        <span data-icon="graduation-cap"></span><span class="demo-btn-text"><strong>Try it as a student</strong><span id="demo-student-meta"></span></span>
+      </a>
+    </section>
   </main>
 </body>
 </html>

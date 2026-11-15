@@ -16,6 +16,7 @@ import { hashSecret } from '../server/secrets.js';
 import { modules as baseModules } from '../db/demo-curriculum.js';
 import { cicModules, extraConcepts } from '../db/demo-cic-modules.js';
 import { demoClasses, STORIES, SAMPLE_ANSWERS } from '../db/demo-classes.js';
+import { JUDGE } from '../db/demo-judge.js';
 
 loadEnv();
 if (!process.env.DATABASE_URL) {
@@ -148,6 +149,25 @@ async function addInstructor(q, added) {
   return u.id;
 }
 
+// Demo access for judges (see db/demo-judge.js). Kept in sync with the env
+// password on every run, so changing DEMO_JUDGE_PASSWORD and re-seeding works.
+async function addJudge(q, added) {
+  const password = process.env.DEMO_JUDGE_PASSWORD;
+  if (!password) return;
+  const r = JUDGE.role;
+  const role = await q.one(
+    `insert into roles (key, name, description) values ($1, $2, $3)
+     on conflict (key) do update set name = excluded.name returning id`, [r.key, r.name, r.description]);
+  for (const p of r.perms) await q('insert into role_permissions values ($1, $2) on conflict do nothing', [role.id, p]);
+  const hash = await hashSecret(password);
+  const u = await q.one(
+    `insert into users (email, name, role_id, password_hash) values ($1, $2, $3, $4)
+     on conflict (email) do update set password_hash = excluded.password_hash, role_id = excluded.role_id,
+       failed_logins = 0, locked_until = null, active = true
+     returning (xmax = 0) as created`, [JUDGE.email, JUDGE.name, role.id, hash]);
+  added.push(`judge ${JUDGE.email}${u.created ? '' : ' (password refreshed)'}`);
+}
+
 async function addClasses(q, added, skipped, instructorId) {
   const pinHash = await hashSecret(demoPin);
   for (const c of demoClasses) {
@@ -191,6 +211,7 @@ const summary = await asSystem(async (q) => {
   const skipped = [];
   await addModules(q, admin, added, skipped);
   await addClasses(q, added, skipped, await addInstructor(q, added));
+  await addJudge(q, added);
   return { added, skipped };
 }, pool);
 

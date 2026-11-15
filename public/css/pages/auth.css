@@ -13,3 +13,11 @@
   font-size: var(--text-sm);
 }
 .auth-alt .icon { color: var(--heading); flex: none; }
+
+/* Demo access card under the sign-in form */
+.auth { gap: var(--space-4); align-content: start; }
+.demo-card h2 { font-size: var(--text-lg); margin-top: var(--space-1); }
+.demo-btn { justify-content: flex-start; text-align: left; gap: var(--space-3); min-height: 60px; padding-block: var(--space-2); border-radius: var(--radius); }
+.demo-btn > .icon { color: var(--link); flex: none; }
+.demo-btn-text { display: grid; gap: 2px; min-width: 0; }
+.demo-btn-text span { font-size: var(--text-xs); font-weight: 500; color: var(--text-muted); overflow-wrap: anywhere; }
