@@ -21,10 +21,13 @@ const brandMark = html`<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="
 </svg>`;
 
 function userMenu(who) {
-  if (who.kind !== 'staff') {
-    return location.pathname === '/signin.html' ? '' : html`<a class="btn btn-primary btn-sm" href="/signin.html">Sign in</a>`;
+  if (!who.kind) {
+    return ['/signin.html', '/join.html'].includes(location.pathname) ? '' : html`<a class="btn btn-primary btn-sm" href="/signin.html">Sign in</a>`;
   }
-  const { name, role_name } = who.user;
+  // Students share Chromebooks, so "Sign out" is one tap away.
+  const [name, role_name] = who.kind === 'staff'
+    ? [who.user.name, who.user.role_name]
+    : [who.student.display_name, who.class_name ?? 'Student'];
   return html`<div class="menu">
     <button class="btn btn-ghost menu-button" type="button" aria-expanded="false" aria-controls="user-menu">
       <span class="avatar avatar-sm" aria-hidden="true">${initials(name)}</span>
@@ -94,7 +97,7 @@ export async function renderShell({ current = location.pathname } = {}) {
 
   const who = await me().catch(() => ({ kind: null }));
   const items = who.kind === 'staff' ? NAV.filter((n) => !n.perm || can(who, n.perm)) : [];
-  if (who.kind === 'staff') header.querySelector('.brand').href = '/home.html';
+  if (who.kind) header.querySelector('.brand').href = who.kind === 'staff' ? '/home.html' : '/learn.html';
   if (items.length) {
     const nav = document.createElement('nav');
     nav.className = 'app-nav';
@@ -102,6 +105,16 @@ export async function renderShell({ current = location.pathname } = {}) {
     render(nav, html`<ul>${items.map((n) => html`<li><a href="${n.href}" ${n.href === current ? html`aria-current="page"` : ''}>${icon(n.icon)}<span>${n.label}</span></a></li>`)}</ul>`);
     header.querySelector('[data-nav]').replaceWith(nav);
   }
+  render(header.querySelector('[data-user]'), userMenu(who));
+  wireMenu(header);
+  return who;
+}
+
+/** Redraw the user menu after signing in on the same page (e.g. a late joiner). */
+export async function refreshUser() {
+  const header = document.querySelector('.app-bar');
+  const who = await me({ refresh: true }).catch(() => ({ kind: null }));
+  if (!header) return who;
   render(header.querySelector('[data-user]'), userMenu(who));
   wireMenu(header);
   return who;

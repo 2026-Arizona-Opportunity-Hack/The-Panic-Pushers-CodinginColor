@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join your class · CIC Classroom</title>
+  <meta name="description" content="Pick your name and enter your PIN to start learning.">
+  <meta name="theme-color" content="#007A3D">
+  <script src="/js/boot.js"></script>
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/glass.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/components-interactive.css">
+  <link rel="stylesheet" href="/css/shell.css">
+  <link rel="stylesheet" href="/css/pages/join.css">
+  <script type="module" src="/js/pages/join.js"></script>
+</head>
+<body>
+  <main id="main" class="container join" tabindex="-1">
+    <!-- Loading -->
+    <section class="glass-strong join-panel" data-step="loading" aria-busy="true">
+      <h1 class="sr-only">Loading your class</h1>
+      <p class="eyebrow" aria-hidden="true">Joining class</p>
+      <div class="skeleton join-skel-title"></div>
+      <div class="name-grid">
+        <div class="skeleton name-skel"></div><div class="skeleton name-skel"></div><div class="skeleton name-skel"></div>
+        <div class="skeleton name-skel"></div><div class="skeleton name-skel"></div><div class="skeleton name-skel"></div>
+      </div>
+    </section>
+
+    <!-- Class not found / no code -->
+    <section class="glass-strong join-panel join-narrow stack" data-step="missing" hidden aria-labelledby="missing-title">
+      <span class="join-badge join-badge-warn"><span data-icon="alert"></span></span>
+      <h1 id="missing-title">We couldn't find that class</h1>
+      <p class="muted" id="missing-text">Check the class code with your teacher and try again.</p>
+      <a class="btn btn-primary btn-lg btn-block" href="/">Enter a class code</a>
+    </section>
+
+    <!-- 1. Pick your name -->
+    <section class="glass-strong join-panel stack" data-step="names" hidden aria-labelledby="class-title">
+      <div class="callout callout-ok" id="already" hidden>
+        <span data-icon="check-circle"></span>
+        <p>Signed in as <strong id="already-name"></strong> · <a href="/learn.html">Go to your lessons</a></p>
+      </div>
+      <header class="join-head">
+        <div>
+          <p class="eyebrow" id="class-school">Your class</p>
+          <h1 id="class-title">Class</h1>
+        </div>
+        <p class="muted">Tap your name to sign in.</p>
+      </header>
+      <div class="field join-search" id="search-field">
+        <label class="sr-only" for="search">Find your name</label>
+        <span class="join-search-icon" data-icon="search"></span>
+        <input class="input" id="search" type="search" placeholder="Find your name" autocomplete="off" spellcheck="false">
+      </div>
+      <p class="sr-only" id="names-status" role="status" aria-live="polite"></p>
+      <ul class="name-grid" id="names" aria-label="Students in this class"></ul>
+      <div class="empty" id="names-empty" hidden>
+        <p><strong>No names match.</strong></p>
+        <p class="muted">Try fewer letters, or use “I'm not on the list”.</p>
+      </div>
+      <div class="join-foot" id="not-listed">
+        <button class="btn btn-secondary" type="button" id="new-start"><span data-icon="plus"></span> I'm not on the list</button>
+        <p class="muted text-sm" id="not-listed-closed" hidden>Not on the list? Ask your teacher to add you.</p>
+      </div>
+    </section>
+
+    <!-- 2. PIN -->
+    <section class="glass-strong join-panel join-narrow" data-step="pin" hidden aria-labelledby="pin-title">
+      <form class="stack" id="pin-form" method="post" novalidate>
+        <button class="btn btn-ghost btn-sm join-back" type="button" data-back><span data-icon="chevron-left"></span> Not you? Pick your name</button>
+        <div class="pin-who">
+          <span class="avatar avatar-lg" id="pin-avatar" aria-hidden="true"></span>
+          <h1 id="pin-title">Hi, <span id="pin-name"></span></h1>
+          <p class="muted">Enter your 4-digit PIN.</p>
+        </div>
+        <div class="callout callout-bad" id="pin-error" role="alert" hidden><span data-icon="x-circle"></span><p></p></div>
+        <div class="field pin-field">
+          <label class="sr-only" for="pin">PIN</label>
+          <input class="input pin-input" id="pin" name="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4"
+                 autocomplete="off" data-field="PIN" aria-describedby="pin-help">
+          <div class="pin-dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <p class="sr-only" id="pin-help">4 numbers. Signs in by itself after the fourth number.</p>
+        </div>
+        <div class="pin-pad" role="group" aria-label="Number pad">
+          <button type="button" class="pin-key" data-digit="1">1</button>
+          <button type="button" class="pin-key" data-digit="2">2</button>
+          <button type="button" class="pin-key" data-digit="3">3</button>
+          <button type="button" class="pin-key" data-digit="4">4</button>
+          <button type="button" class="pin-key" data-digit="5">5</button>
+          <button type="button" class="pin-key" data-digit="6">6</button>
+          <button type="button" class="pin-key" data-digit="7">7</button>
+          <button type="button" class="pin-key" data-digit="8">8</button>
+          <button type="button" class="pin-key" data-digit="9">9</button>
+          <button type="button" class="pin-key pin-key-alt" data-clear>Clear</button>
+          <button type="button" class="pin-key" data-digit="0">0</button>
+          <button type="button" class="pin-key pin-key-alt" data-erase><span data-icon="chevron-left" data-icon-label="Delete"></span></button>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="pin-submit">Sign in</button>
+        <p class="muted text-sm join-forgot">Forgot your PIN? Your teacher can reset it.</p>
+      </form>
+    </section>
+
+    <!-- 3. Late joiner: add your name -->
+    <section class="glass-strong join-panel join-narrow" data-step="new" hidden aria-labelledby="new-title">
+      <form class="stack" id="new-form" method="post" novalidate>
+        <button class="btn btn-ghost btn-sm join-back" type="button" data-back><span data-icon="chevron-left"></span> Back to the list</button>
+        <div>
+          <p class="eyebrow">New to this class</p>
+          <h1 id="new-title">What's your name?</h1>
+          <p class="muted">Use the name your teacher knows you by. If someone already has it, add your last initial.</p>
+        </div>
+        <div class="field">
+          <label for="new-name">Your name</label>
+          <input class="input input-lg" id="new-name" name="display_name" data-field="Your name" maxlength="60" autocomplete="off" required>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Join the class</button>
+      </form>
+    </section>
+
+    <!-- 4. Late joiner: your PIN (shown once) -->
+    <section class="glass-strong join-panel join-narrow stack" data-step="reveal" hidden aria-labelledby="reveal-title">
+      <span class="join-badge"><span data-icon="lock"></span></span>
+      <div>
+        <p class="eyebrow">You're in!</p>
+        <h1 id="reveal-title">This is your PIN</h1>
+      </div>
+      <p class="pin-reveal" id="reveal-pin" aria-describedby="reveal-note"></p>
+      <div class="callout callout-warn" id="reveal-note">
+        <span data-icon="alert"></span>
+        <p><strong>Write it down now.</strong> You need it every time you sign in, and we can't show it again. If you lose it, your teacher can reset it.</p>
+      </div>
+      <label class="check"><input type="checkbox" id="reveal-ok"> I wrote down my PIN</label>
+      <button class="btn btn-primary btn-lg btn-block" type="button" id="reveal-go" disabled>Start learning <span data-icon="arrow-right"></span></button>
+    </section>
+  </main>
+</body>
+</html>
