@@ -58,7 +58,7 @@ Coding in Color teaches Arizona high school students (ages 14 to 18) in partner 
 
 | Who | How to sign in | Where to look |
 |---|---|---|
-| **Student** | Go to `/`, enter class code **`PHX234`**, tap a name, PIN **`1234`** | Try **Destiny J.** (not started) or **Camila R.** (stuck) |
+| **Student** | Go to `/`, enter class code **`PHX234`**, tap a name, PIN **`1234`** | Try **Destiny J.** (not started) or **Imani K.** (stuck) |
 | **Instructor** | `/signin.html` as `instructor@demo.codingincolor.test`, password from `DEMO_STAFF_PASSWORD` | **Classes → Story Lab · Period 5** shows every case |
 | **CIC admin** | `/signin.html` as `admin@codingincolor.net`, password from `SEED_PASSWORD` | Sees every class, including the archived one |
 
