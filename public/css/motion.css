@@ -2,9 +2,9 @@
    never set when the viewer prefers reduced motion. */
 
 /* Spotlight: a soft light under the pointer on glass cards. */
-.motion :is(.glass, .glass-strong:not(.glass-bar), .journey-card, .class-card, .today-item, .name-btn) {
-  background-image: radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px),
-    light-dark(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.06)), transparent 60%);
+.motion :is(.glass, .glass-strong:not(.glass-bar)) {
+  background-image: radial-gradient(380px circle at var(--mx, -999px) var(--my, -999px),
+    light-dark(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.07)), transparent 60%), var(--glass-fill);
 }
 
 /* Reveal: cards fade up once as they come into view. */

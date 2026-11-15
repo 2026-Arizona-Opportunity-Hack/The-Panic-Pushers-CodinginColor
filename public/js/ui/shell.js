@@ -94,7 +94,12 @@ export async function renderShell({ current = location.pathname } = {}) {
     <p class="cluster"><button class="btn btn-ghost btn-sm" type="button" data-settings>${icon('sliders')} Display settings</button></p>
   </div>`);
 
-  document.body.prepend(skip, header);
+  const orbs = document.createElement('div');
+  orbs.className = 'bg-orbs';
+  orbs.setAttribute('aria-hidden', 'true');
+  orbs.append(...Array.from({ length: 5 }, () => document.createElement('span')));
+
+  document.body.prepend(skip, orbs, header);
   document.body.append(footer);
   for (const b of document.querySelectorAll('[data-settings]')) b.addEventListener('click', openSettings);
 
