@@ -1,0 +1,15 @@
+/* Sign-in page */
+.auth { display: grid; place-items: center; padding-block: clamp(var(--space-6), 8vw, var(--space-8)); }
+.auth-card { width: min(440px, 100%); padding: clamp(var(--space-5), 4vw, var(--space-6)); }
+.auth-card h1 { font-size: var(--text-2xl); margin-top: var(--space-1); }
+.password-wrap { position: relative; }
+.password-wrap .input { padding-right: 5rem; }
+.password-wrap .btn { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); }
+.auth-alt {
+  display: flex; gap: var(--space-2); align-items: flex-start;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+.auth-alt .icon { color: var(--heading); flex: none; }

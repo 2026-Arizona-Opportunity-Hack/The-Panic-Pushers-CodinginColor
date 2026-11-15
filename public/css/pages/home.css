@@ -1,0 +1,8 @@
+/* Staff home */
+.home-skel { width: 280px; height: 2.4rem; }
+.home-grid { list-style: none; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.home-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+.home-card h2 { font-size: var(--text-xl); color: var(--text); }
+.home-card p { color: var(--text-muted); flex: 1; }
+.home-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--accent-soft); color: var(--heading); }
+.home-icon .icon { width: 26px; height: 26px; }
