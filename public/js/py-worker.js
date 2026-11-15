@@ -30,9 +30,19 @@ function cleanError(err) {
   return [frames.length ? 'Traceback (most recent call last):' : '', ...frames, ...tail].filter(Boolean).join('\n');
 }
 
+// Always answer, even if something unexpected breaks, so the page never waits forever.
 self.onmessage = async (e) => {
   const { id, code, tests } = e.data;
-  if (e.data.warmup) { await ready(); self.postMessage({ id, warm: true }); return; }
+  try {
+    if (e.data.warmup) { await ready(); self.postMessage({ id, warm: true }); return; }
+    self.postMessage(await run(id, code, tests));
+  } catch (err) {
+    pyReady = null; // try a fresh load next time
+    self.postMessage({ id, stdout: '', error: `The Python runner hit a problem: ${err?.message || err}`, testError: null });
+  }
+};
+
+async function run(id, code, tests) {
   const py = await ready();
   let stdout = '';
   py.setStdout({ batched: (s) => { stdout += s + '\n'; } });
@@ -58,5 +68,5 @@ self.onmessage = async (e) => {
   }
   ns.destroy();
   result.stdout = stdout.slice(0, 20_000);
-  self.postMessage(result);
-};
+  return result;
+}

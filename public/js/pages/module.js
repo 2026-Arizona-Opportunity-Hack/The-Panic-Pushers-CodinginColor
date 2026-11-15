@@ -278,18 +278,32 @@ function drawCode(head, a, c, done, last, footer) {
     return r;
   }
 
-  $('#run').addEventListener('click', async (e) => {
-    setBusy(e.currentTarget, true);
-    await run();
-    setBusy(e.currentTarget, false);
-  });
+  // One action at a time: Run, Check and Hint share a lock, and it is always
+  // released, even when something fails.
+  const actions = ['#run', '#check', '#hint'].map((sel) => $(sel));
+  let working = false;
+  async function exclusive(button, fn) {
+    if (working) return;
+    working = true;
+    for (const b of actions) b.disabled = true;
+    setBusy(button, true);
+    try {
+      await fn();
+    } catch (err) {
+      toast(err.message || 'Something went wrong. Try again.', { type: 'bad' });
+    } finally {
+      working = false;
+      for (const b of actions) if (b.isConnected) { b.disabled = false; setBusy(b, false); }
+    }
+  }
+
+  $('#run').addEventListener('click', (e) => exclusive(e.currentTarget, run));
   $('#reset').addEventListener('click', () => {
     ta.value = c.starter || '';
     store.set(draftKey(a.id), ta.value);
     ta.focus();
   });
-  $('#check').addEventListener('click', async (e) => {
-    setBusy(e.currentTarget, true);
+  $('#check').addEventListener('click', (e) => exclusive(e.currentTarget, async () => {
     const r = await run();
     const saved = out.innerHTML;
     const res = await submit({ code: ta.value, output: (r.stdout || r.error || '').slice(0, 5000), passed: r.passed }, null).catch(() => null);
@@ -298,19 +312,13 @@ function drawCode(head, a, c, done, last, footer) {
     if (res.passed) feedback('ok', 'All checks passed!', 'Great work.');
     else if (res.feedback.moved_on) feedback('warn', 'Not passing yet, but the next step is open.', "You've tried 5 times. Your teacher can see this one and help.");
     else feedback('warn', 'Not yet.', r.testError ? `A check didn't pass: ${r.testError}` : r.mismatch || 'Read the error, try again, or ask for a hint.');
-  });
-  $('#hint').addEventListener('click', async (e) => {
-    setBusy(e.currentTarget, true);
-    try {
-      const r = lastResult || (await run());
-      const error = r.error || r.testError || r.mismatch || '';
-      const h = await api.post(`me/activities/${a.id}/hint`, { error });
-      $('#hints').insertAdjacentHTML('beforeend', String(html`<div class="hint-card glass" role="status"><strong>${icon('lightbulb')} Hint ${h.hint_number}</strong><p>${h.hint}</p></div>`));
-    } catch (err) {
-      toast(err.message, { type: 'bad' });
-    }
-    setBusy(e.currentTarget, false);
-  });
+  }));
+  $('#hint').addEventListener('click', (e) => exclusive(e.currentTarget, async () => {
+    const r = lastResult || (await run());
+    const error = r.error || r.testError || r.mismatch || '';
+    const h = await api.post(`me/activities/${a.id}/hint`, { error });
+    $('#hints').insertAdjacentHTML('beforeend', String(html`<div class="hint-card glass" role="status"><strong>${icon('lightbulb')} Hint ${h.hint_number}</strong><p>${h.hint}</p></div>`));
+  }));
   wireNext();
 }
 
