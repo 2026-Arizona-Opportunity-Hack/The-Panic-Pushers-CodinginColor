@@ -30,7 +30,7 @@ export async function makeStaff(q, tag, key, perms) {
 }
 
 /** A signed-in client: call(method, path, body) with cookie and CSRF handled. */
-export async function client(base, { email, password = PASSWORD } = {}) {
+export async function client(base, { email, password = PASSWORD, student } = {}) {
   let cookie = null;
   let csrf = null;
   const call = async (method, path, body) => {
@@ -46,6 +46,11 @@ export async function client(base, { email, password = PASSWORD } = {}) {
   if (email) {
     const r = await call('POST', 'auth/login', { email, password });
     if (r.status !== 200) throw new Error(`Sign-in failed for ${email}: ${r.status}`);
+    csrf = (await call('GET', 'auth/me')).json.csrf;
+  }
+  if (student) { // { code, id, pin }
+    const r = await call('POST', `join/${student.code}/login`, { student_id: student.id, pin: student.pin });
+    if (r.status !== 200) throw new Error(`Student sign-in failed: ${r.status}`);
     csrf = (await call('GET', 'auth/me')).json.csrf;
   }
   return call;
