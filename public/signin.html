@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · CIC Classroom</title>
+  <meta name="description" content="Sign in for instructors, CIC staff and curriculum reviewers.">
+  <meta name="theme-color" content="#007A3D">
+  <script src="/js/boot.js"></script>
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/glass.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/components-interactive.css">
+  <link rel="stylesheet" href="/css/shell.css">
+  <link rel="stylesheet" href="/css/pages/auth.css">
+  <script type="module" src="/js/pages/signin.js"></script>
+</head>
+<body>
+  <main id="main" class="container auth" tabindex="-1">
+    <!-- method="post": if someone submits before the script loads, the
+         password still never ends up in the URL, history or server logs. -->
+    <form class="glass-strong auth-card stack" id="signin-form" method="post" novalidate aria-labelledby="signin-title">
+      <div>
+        <p class="eyebrow" id="signin-for">Instructors and CIC staff</p>
+        <h1 id="signin-title">Sign in</h1>
+      </div>
+      <div class="callout callout-bad" id="form-error" role="alert" hidden><span data-icon="x-circle"></span><p></p></div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input class="input" id="email" name="email" type="email" data-field="Email" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="password-wrap">
+          <input class="input" id="password" name="password" type="password" data-field="Password" autocomplete="current-password" required>
+          <button class="btn btn-ghost btn-sm" type="button" id="toggle-password" aria-controls="password" aria-pressed="false">Show</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
+      <p class="auth-alt"><span data-icon="graduation-cap"></span><span>Student? You don't need a password. <a href="/">Use your class code</a>.</span></p>
+    </form>
+  </main>
+</body>
+</html>
