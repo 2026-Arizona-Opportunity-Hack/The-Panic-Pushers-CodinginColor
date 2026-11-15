@@ -49,6 +49,9 @@ jobs:
       - name: Check security headers match vercel.json
         run: npm run check:headers
 
+      - name: Check every text color meets WCAG AA contrast
+        run: npm run check:contrast
+
       - name: Create schema, roles and the restricted app role
         run: npm run db:setup
 
