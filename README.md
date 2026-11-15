@@ -6,7 +6,7 @@ Built by **The Panic Pushers** at [ASU Fall Hackathon 2026 | Phoenix Hackathon f
 
 | | |
 |---|---|
-| **Live demo** | _Vercel link goes here_ |
+| **Live demo** | **https://codingincolor.vercel.app** |
 | **Demo video** | _video link goes here_ |
 | **Try it** | Class code **`PHX234`**, any name, PIN **`1234`** (see [Demo logins](#demo-logins)) |
 
@@ -95,6 +95,8 @@ CI runs all three on every pull request against a throwaway Postgres, and fails 
 1. Import this repo in Vercel. The settings come from `vercel.json`: build `npm run build`, output `public`, and one serverless function at `api/index.js`.
 2. Set the environment variables: **`APP_DATABASE_URL`** (the restricted `cic_app` connection string). Don't give Vercel the owner `DATABASE_URL`.
 3. Run `npm run db:setup -- --reset` and `npm run db:seed` once from your machine against the same Neon database.
+
+Without the GitHub integration (it needs an organization owner), deploy from a laptop instead: `npx vercel link`, add `APP_DATABASE_URL` with `vercel env add`, then `npx vercel deploy --prod`. `.vercelignore` keeps `.env` and other local files out of the upload.
 
 Running costs: Vercel Hobby and Neon Free cover a pilot. Nothing else is billed.
 
