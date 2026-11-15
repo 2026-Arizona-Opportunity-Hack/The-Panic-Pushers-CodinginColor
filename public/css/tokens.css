@@ -1,0 +1,159 @@
+/* CIC Glass: design tokens.
+ *
+ * Brand source: Coding in Color brand guidelines, section 7.
+ *   CIC_DARK_GREEN    #007A3D  headings, links, primary buttons (the workhorse)
+ *   CIC_PRIMARY_GREEN #00A850  accents only: progress, success, logo. Never body text.
+ *   CIC_LIGHT_TINT    #E6F4ED  soft fills, table stripes
+ *   CIC_MED_GRAY      #595959  supporting copy
+ *
+ * Every color is defined once as light-dark(light, dark). The theme follows the
+ * device unless the viewer picks one in Display settings (data-theme on <html>).
+ * scripts/check-contrast.js reads this file and fails CI if any text pair drops
+ * below WCAG AA 4.5:1, so change colors here and run `npm run check:contrast`.
+ */
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/plus-jakarta-sans.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* ---- Brand constants (fixed in both themes) ---- */
+  --cic-green: #00A850;
+  --cic-green-dark: #007A3D;
+  --cic-tint: #E6F4ED;
+  --cic-gray: #595959;
+  --sun: #FFB703;
+
+  /* ---- Page ---- */
+  --bg: light-dark(#F8FBF9, #06140D);
+  --aurora-1: light-dark(rgba(0, 168, 80, 0.12), rgba(0, 168, 80, 0.22));
+  --aurora-2: light-dark(rgba(31, 170, 160, 0.13), rgba(20, 120, 112, 0.24));
+  --aurora-3: light-dark(rgba(255, 183, 3, 0.14), rgba(255, 183, 3, 0.08));
+  --aurora-4: light-dark(rgba(0, 122, 61, 0.08), rgba(0, 122, 61, 0.30));
+
+  /* ---- Glass surfaces ---- */
+  --surface: light-dark(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.07));
+  --surface-strong: light-dark(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.11));
+  --surface-solid: light-dark(#FFFFFF, #10211A);
+  --surface-sunken: light-dark(rgba(0, 58, 29, 0.05), rgba(0, 0, 0, 0.25));
+  --glass-border: light-dark(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.12));
+  --glass-highlight: light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.08));
+  --glass-blur: 18px;
+  --line: light-dark(rgba(0, 58, 29, 0.14), rgba(255, 255, 255, 0.14));
+  --line-strong: light-dark(rgba(0, 58, 29, 0.32), rgba(255, 255, 255, 0.32));
+
+  /* ---- Text ---- */
+  --text: light-dark(#0B1F14, #EAF5EE);
+  --text-muted: light-dark(#46524B, #A9BDB2);
+  --heading: light-dark(#007A3D, #EAF5EE);
+  --link: light-dark(#006B35, #8FE3B6);
+  --code-text: light-dark(#0B1F14, #DDEFE5);
+  --code-bg: light-dark(rgba(0, 58, 29, 0.07), rgba(0, 0, 0, 0.35));
+
+  /* ---- Actions ---- */
+  --primary: light-dark(#007A3D, #00A850);
+  --primary-hover: light-dark(#00602F, #19C26A);
+  --on-primary: light-dark(#FFFFFF, #04130B);
+  --accent: var(--cic-green);                       /* fills only: progress, success dots */
+  --accent-soft: light-dark(#E6F4ED, rgba(0, 168, 80, 0.16));
+
+  /* ---- Status (text-safe on surfaces) ---- */
+  --ok: light-dark(#1D6B3A, #8EE6B2);
+  --ok-soft: light-dark(#E3F4E8, rgba(127, 220, 166, 0.10));
+  --warn: light-dark(#8A5300, #FFC861);
+  --warn-soft: light-dark(#FFF3D6, rgba(255, 200, 97, 0.14));
+  --bad: light-dark(#A3221B, #FFB4AC);
+  --bad-soft: light-dark(#FDE8E6, rgba(255, 155, 145, 0.10));
+  --info: light-dark(#1F5FAD, #B0D0FF);
+  --info-soft: light-dark(#E7F0FC, rgba(156, 196, 255, 0.10));
+
+  /* ---- Focus: dark ring + sun glow, visible on every surface ---- */
+  --focus-ring: light-dark(#003D1F, #FFFFFF);
+  --focus-glow: rgba(255, 183, 3, 0.65);
+
+  /* ---- Shape and depth ---- */
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --shadow: light-dark(0 12px 32px -14px rgba(0, 58, 29, 0.28), 0 14px 36px -12px rgba(0, 0, 0, 0.6));
+  --shadow-lg: light-dark(0 24px 60px -20px rgba(0, 58, 29, 0.35), 0 28px 64px -18px rgba(0, 0, 0, 0.7));
+
+  /* ---- Spacing (4px grid) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* ---- Type ---- */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 0.8125rem;   /* 13px captions */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px body */
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  --leading: 1.55;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur: 240ms;
+  --tap: 44px;            /* minimum touch target */
+}
+
+/* Viewer's explicit theme choice wins over the device setting. */
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark']  { color-scheme: dark; }
+
+/* Text size setting. */
+:root[data-text='lg'] { font-size: 112.5%; }
+:root[data-text='xl'] { font-size: 125%; }
+
+/* High contrast: opaque surfaces, full-strength text and borders, no aurora. */
+:root[data-contrast='more'] {
+  --surface: var(--surface-solid);
+  --surface-strong: var(--surface-solid);
+  --glass-blur: 0px;
+  --glass-border: light-dark(#0B1F14, #EAF5EE);
+  --line: light-dark(rgba(0, 0, 0, 0.45), rgba(255, 255, 255, 0.5));
+  --line-strong: light-dark(#0B1F14, #EAF5EE);
+  --text-muted: var(--text);
+  --aurora-1: transparent; --aurora-2: transparent; --aurora-3: transparent; --aurora-4: transparent;
+}
+@media (prefers-contrast: more) {
+  :root:not([data-contrast='normal']) {
+    --surface: var(--surface-solid);
+    --surface-strong: var(--surface-solid);
+    --glass-blur: 0px;
+    --glass-border: light-dark(#0B1F14, #EAF5EE);
+    --line-strong: light-dark(#0B1F14, #EAF5EE);
+    --text-muted: var(--text);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --surface: var(--surface-solid);
+    --surface-strong: var(--surface-solid);
+    --glass-blur: 0px;
+  }
+}

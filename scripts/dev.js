@@ -12,7 +12,7 @@ const { SECURITY_HEADERS } = await import('../server/headers.js');
 const PORT = Number(process.env.PORT || 3000);
 const root = path.resolve('public');
 const pyodideDir = path.resolve('node_modules/pyodide');
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.wasm': 'application/wasm', '.zip': 'application/zip', '.csv': 'text/csv', '.txt': 'text/plain' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.wasm': 'application/wasm', '.zip': 'application/zip', '.csv': 'text/csv', '.txt': 'text/plain' };
 
 http.createServer(async (req, res) => {
   for (const [k, v] of Object.entries(SECURITY_HEADERS)) if (k !== 'Strict-Transport-Security') res.setHeader(k, v);

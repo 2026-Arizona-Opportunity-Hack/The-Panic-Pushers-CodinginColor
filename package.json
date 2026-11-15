@@ -13,6 +13,7 @@
     "build": "node scripts/build.js",
     "db:setup": "node scripts/db-setup.js",
     "check:headers": "node scripts/check-headers.js",
+    "check:contrast": "node scripts/check-contrast.js",
     "test": "node --test \"test/*.test.js\""
   },
   "dependencies": {
