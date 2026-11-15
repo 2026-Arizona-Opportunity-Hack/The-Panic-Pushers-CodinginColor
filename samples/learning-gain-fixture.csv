@@ -1,0 +1,15 @@
+student,case,pre_score,pre_max,post_score,post_max,expected_included,expected_gain_pts,expected_normalized,expected_reason
+Aaliyah B.,typical improvement,2,8,7,8,yes,62.5,0.83,
+Andre M.,started at zero,0,8,6,8,yes,75,0.75,
+Camila R.,perfect improvement,4,8,8,8,yes,50,1,
+Darnell W.,ceiling (100% before and after),8,8,8,8,yes,0,,ceiling: no room to grow
+Destiny J.,ceiling then dropped,8,8,7,8,yes,-12.5,,ceiling: no room to grow
+Elijah T.,negative gain,5,8,3,8,yes,-25,-0.67,
+Imani K.,no change,3,8,3,8,yes,0,0,
+Jayden C.,no post-test yet (absent),4,8,,,no,,,no post-test
+José L.,no pretest (late joiner),,,6,8,no,,,no pretest
+Keanu P.,never started,,,,,no,,,no pretest
+Maria G.,different test lengths (3 then 4 questions),1,3,3,4,yes,41.7,0.63,
+Nia S.,score of zero on the post-test,2,8,0,8,yes,-25,-0.33,
+Ravi N.,bad data: score above max,9,8,8,8,no,,,score out of range
+Sofia H.,both zero,0,8,0,8,yes,0,0,

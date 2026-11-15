@@ -1,0 +1,26 @@
+line,result,display_name,message
+2,add,Maria Ga.,"Shares ""Maria G."" with line 3, so both get one more letter"
+3,add,Maria Go.,Capitalized; shares a short name with line 2
+4,add,José H.,Spaces trimmed; accents kept
+5,add,D'Andre W.,
+6,blank,,Empty row skipped
+7,error,,First name is required
+8,add,Kai,No last name: first name only
+9,add,Anh N.,
+10,duplicate,,Same student ID as line 9
+11,add,Luis L.,Quoted comma read as part of the last name
+12,add,Zoë O.,
+13,add,Marcus J.,All-capitals name changed to Marcus
+14,add,Sam Le.,Shares a short name with line 15
+15,add,Sam Li.,Shares a short name with line 14
+16,add,Mia C.,"Only the last initial is kept, so the emoji is never stored"
+17,error,,"Names can only use letters, spaces, . ' and -"
+18,error,,"Names can only use letters, spaces, . ' and -"
+19,error,,Name is longer than 60 characters
+20,conflict,Aaliyah B.,Already in this class: skip it or rename to Aaliyah Br.
+21,error,,"Names can only use letters, spaces, . ' and - (remove the quotes around the nickname)"
+22,add,Tran P.,Tabs trimmed
+23,add,Ana Sofía R.,Two-word first name kept
+24,duplicate,,Same student ID as line 23
+25,add,Leilani K.,Student ID is optional
+26,add,Omar H.,Last line has no line ending
