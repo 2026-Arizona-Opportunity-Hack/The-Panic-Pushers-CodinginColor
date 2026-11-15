@@ -11,7 +11,7 @@ await renderShell({ current: '/home.html' });
 // Each area appears for anyone holding one of its permissions. `ready` flips
 // to a link as each part of the platform is built.
 const AREAS = [
-  { perms: ['classes.manage_own', 'classes.manage_all'], icon: 'users', title: 'My classes', text: 'Create a class, import a roster CSV, print join cards and see who is stuck.' },
+  { perms: ['classes.manage_own', 'classes.manage_all'], icon: 'users', title: 'My classes', text: 'See who is stuck or has not started, set the class pace, reset PINs and track learning gain.', href: '/teach.html' },
   { perms: ['curriculum.write'], icon: 'edit', title: 'Write curriculum', text: 'Build modules from videos, checks, worksheets and Python exercises, then publish.' },
   { perms: ['curriculum.read'], icon: 'book', title: 'Browse curriculum', text: 'Read every module, including pretests and post-tests, and preview it as a student.' },
   { perms: ['reports.read_all'], icon: 'chart', title: 'Impact and learning gain', text: 'Completion and learning gain by cohort, class and concept, ready for grant reports.' },

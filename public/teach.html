@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My classes · CIC Classroom</title>
+  <meta name="description" content="Your classes, who needs help and where each class is.">
+  <meta name="theme-color" content="#007A3D">
+  <script src="/js/boot.js"></script>
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/glass.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/components-interactive.css">
+  <link rel="stylesheet" href="/css/shell.css">
+  <link rel="stylesheet" href="/css/pages/teach.css">
+  <script type="module" src="/js/pages/teach.js"></script>
+</head>
+<body>
+  <main id="main" class="container teach" tabindex="-1">
+    <header class="teach-head">
+      <div><p class="eyebrow">Instructor</p><h1>My classes</h1></div>
+      <p class="muted">Open a class to see who needs help today.</p>
+    </header>
+    <ul class="class-grid" id="classes" aria-label="Classes">
+      <li class="skeleton class-skel"></li><li class="skeleton class-skel"></li><li class="skeleton class-skel"></li>
+    </ul>
+  </main>
+</body>
+</html>
