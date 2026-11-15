@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>CIC Classroom · Coding in Color</title>
   <meta name="description" content="Coding in Color's classroom: students learn computer science at their own pace from a class code; teachers see progress and learning gain.">
-  <meta name="theme-color" content="#007A3D">
+  <meta name="theme-color" content="#000000">
   <script src="/js/boot.js"></script>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
@@ -17,47 +18,42 @@
   <link rel="stylesheet" href="/css/pages/landing.css">
   <script type="module" src="/js/pages/landing.js"></script>
 </head>
-<body>
+<body class="is-cine">
   <main id="main" tabindex="-1">
-    <section class="container hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Coding in Color · Classroom</p>
-        <h1 id="hero-title">Learn to code at your own pace. <span class="hero-accent">Nobody falls behind.</span></h1>
-        <p class="hero-lead">Short videos, quick checks and real Python, right in your browser. Your teacher sees where you are, and you pick up exactly where you left off.</p>
-        <ul class="hero-points">
-          <li><span data-icon="check-circle"></span>No email or account. Just a class code.</li>
-          <li><span data-icon="code"></span>Python runs in the browser, even on a Chromebook.</li>
-          <li><span data-icon="lightbulb"></span>Hints ask you questions. They never give away the answer.</li>
-        </ul>
+    <section class="cine" aria-labelledby="hero-title">
+      <canvas class="cine-canvas" id="cine-canvas" aria-hidden="true"></canvas>
+      <div class="cine-grid" aria-hidden="true"></div>
+      <div class="container cine-inner">
+        <p class="cine-kicker"><span class="cine-dot" aria-hidden="true"></span>01 · The classroom · Phoenix, Arizona</p>
+        <h1 id="hero-title" class="cine-title">Talent is everywhere. <span class="cine-title-2">Now the classroom is too.</span></h1>
+        <p class="cine-lead">Short lessons, real Python right in the browser, and hints that ask instead of tell. No email, no account. Just a class code.</p>
+
+        <form class="cine-join" id="join-form" novalidate aria-labelledby="join-title">
+          <p class="cine-label" id="join-title"><span class="cine-dot" aria-hidden="true"></span>I'm a student</p>
+          <div class="field">
+            <label class="sr-only" for="class-code">Class code</label>
+            <div class="cine-join-row">
+              <input class="input input-code" id="class-code" name="code" data-field="Class code" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" placeholder="CLASS CODE" aria-describedby="code-hint" required>
+              <button class="btn cine-btn" type="submit">Join my class <span class="cine-btn-arrow" data-icon="arrow-right"></span></button>
+            </div>
+            <p class="cine-hint" id="code-hint">6 letters and numbers. Your teacher has it on the board.</p>
+          </div>
+        </form>
+
+        <p class="cine-alt"><a href="/signin.html">I teach <span aria-hidden="true">↗</span></a><a href="/signin.html?as=reviewer">Explore the curriculum <span aria-hidden="true">↗</span></a></p>
       </div>
 
-      <form class="glass-strong join-card stack" id="join-form" novalidate aria-labelledby="join-title">
-        <span class="join-badge" data-icon="graduation-cap"></span>
-        <h2 id="join-title">I'm a student</h2>
-        <div class="field">
-          <label for="class-code">Class code</label>
-          <input class="input input-code" id="class-code" name="code" data-field="Class code" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" placeholder="K7M2QP" aria-describedby="code-hint" required>
-          <p class="hint" id="code-hint">6 letters and numbers. Your teacher has it on the board.</p>
-        </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Join my class <span data-icon="arrow-right"></span></button>
-      </form>
-    </section>
-
-    <section class="container paths" aria-label="Other ways in">
-      <a class="glass card interactive path" href="/signin.html">
-        <span class="path-icon" data-icon="users"></span>
-        <span class="path-text"><strong>I teach</strong><span>Set up a class in minutes, share a code, and see who's stuck.</span></span>
-        <span data-icon="chevron-right"></span>
-      </a>
-      <a class="glass card interactive path" href="/signin.html?as=reviewer">
-        <span class="path-icon" data-icon="book"></span>
-        <span class="path-text"><strong>Explore the curriculum</strong><span>For district and K12 reviewers: read-only access to every module.</span></span>
-        <span data-icon="chevron-right"></span>
-      </a>
+      <dl class="container cine-stats">
+        <div><dd>140+</dd><dt>Students at Day of Compute</dt></div>
+        <div><dd>03</dd><dt>AI Academy partner schools</dt></div>
+        <div><dd>00</dd><dt>Accounts a student needs</dt></div>
+        <div><dd>∞</dd><dt>Tries before you get it</dt></div>
+      </dl>
     </section>
 
     <section class="container how" aria-labelledby="how-title">
-      <h2 id="how-title">How a module works</h2>
+      <p class="cine-kicker"><span class="cine-dot" aria-hidden="true"></span>02 · How a module works</p>
+      <h2 id="how-title">One step at a time. Nobody falls behind.</h2>
       <ol class="how-steps">
         <li class="glass card"><span class="how-num">1</span><h3>Quick pretest</h3><p>A few questions so you and your teacher know where you're starting.</p></li>
         <li class="glass card"><span class="how-num">2</span><h3>Watch, then check</h3><p>A short video or slides, then one question to make sure it clicked.</p></li>
@@ -67,13 +63,9 @@
     </section>
 
     <section class="container impact glass card" aria-labelledby="impact-title">
-      <h2 id="impact-title">Built for Coding in Color</h2>
+      <p class="cine-kicker"><span class="cine-dot" aria-hidden="true"></span>03 · Built for Coding in Color</p>
+      <h2 id="impact-title">Developing Arizona's future digital workforce.</h2>
       <p>Coding in Color brings computer science and AI to Arizona high schoolers whose schools don't offer it: AI Academy cohorts at Desert Edge, Maryvale and Salt River, year-long programs, summer camps and Day of Compute. This classroom turns those lessons into something any teacher can run from a link, and shows how much students actually learned.</p>
-      <dl class="impact-stats">
-        <div><dt>Students at Day of Compute</dt><dd>140+</dd></div>
-        <div><dt>AI Academy partner schools</dt><dd>3</dd></div>
-        <div><dt>Accounts a student needs</dt><dd>0</dd></div>
-      </dl>
     </section>
   </main>
 </body>

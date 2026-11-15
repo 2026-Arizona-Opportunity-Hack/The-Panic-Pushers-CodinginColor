@@ -5,10 +5,12 @@ import { renderShell } from '../ui/shell.js';
 import { setBusy, showFieldErrors, clearFieldErrors, toast } from '../ui/components.js';
 import { api } from '../ui/api.js';
 import { blurIn } from '../ui/motion.js';
+import { codeGlobe } from '../ui/code-globe.js';
 
 fillIcons();
 renderShell();
 blurIn($('#hero-title'));
+codeGlobe($('#cine-canvas'));
 
 const form = $('#join-form');
 const input = $('#class-code');

@@ -95,3 +95,15 @@
   .gain-row { grid-template-columns: 1fr; }
   .gain-num { justify-items: start; }
 }
+
+/* ---- Demo-day polish ---- */
+.nowrap { white-space: nowrap; }
+.gain-pts { white-space: nowrap; font-size: var(--text-base); }
+.gain-pts strong { font-size: var(--text-lg); }
+.gain-range { white-space: nowrap; }
+.class-card-pace { align-items: flex-start; }
+.class-card-pace strong { min-width: 0; }
+.class-card-top { flex-wrap: nowrap; align-items: flex-start; }
+.class-card-top .badge:first-child { min-width: 0; white-space: normal; text-align: left; }
+.class-card-top .code-chip { flex-shrink: 0; }
+.pace select { max-width: min(380px, 100%); }

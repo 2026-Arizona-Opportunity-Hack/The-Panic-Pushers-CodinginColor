@@ -31,7 +31,7 @@ function userMenu(who) {
     ? [who.user.name, who.user.role_name]
     : [who.student.display_name, who.class_name ?? 'Student'];
   return html`<div class="menu">
-    <button class="btn btn-ghost menu-button" type="button" aria-expanded="false" aria-controls="user-menu">
+    <button class="btn btn-ghost menu-button" type="button" aria-expanded="false" aria-controls="user-menu" aria-label="Account menu for ${name}">
       <span class="avatar avatar-sm" aria-hidden="true">${initials(name)}</span>
       <span class="menu-name">${name}</span>${icon('chevron-down')}
     </button>

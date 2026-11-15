@@ -50,7 +50,7 @@ export function openSettings() {
   dialog = createDialog({
     title: 'Display settings',
     body: html`<div class="stack settings">
-      <div class="setting"><p class="label" aria-hidden="true">Theme</p>${radios('theme', 'Theme', [['system', 'Device'], ['light', 'Light', 'sun'], ['dark', 'Dark', 'moon']], p.theme)}</div>
+      <div class="setting"><p class="label" aria-hidden="true">Theme</p>${radios('theme', 'Theme', [['system', 'Dark', 'moon'], ['light', 'Light', 'sun']], p.theme)}</div>
       <div class="setting"><p class="label" aria-hidden="true">Text size</p>${radios('text', 'Text size', [['base', 'A'], ['lg', 'A+'], ['xl', 'A++']], p.text)}</div>
       <label class="check setting-row"><span><strong>High contrast</strong><span class="hint">Solid backgrounds and stronger borders</span></span>
         <input type="checkbox" role="switch" class="switch" data-pref="contrast" ${p.contrast === 'more' ? 'checked' : ''}></label>
