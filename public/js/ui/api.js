@@ -78,3 +78,11 @@ export async function requireStaff() {
 }
 
 export const can = (who, perm) => Boolean(who?.perms?.includes(perm));
+
+/** Student-only page guard: anyone else goes to the class-code page (staff to home). */
+export async function requireStudent() {
+  const who = await me().catch(() => ({ kind: null }));
+  if (who.kind === 'student') return who;
+  location.replace(who.kind === 'staff' ? '/home.html' : '/');
+  return new Promise(() => {});
+}
