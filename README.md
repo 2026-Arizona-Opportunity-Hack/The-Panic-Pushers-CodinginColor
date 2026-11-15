@@ -54,18 +54,45 @@ Coding in Color teaches Arizona high school students (ages 14 to 18) in partner 
 - Three starter Python modules: print and variables, loops, and if/else.
 - **4 demo classes, 54 students, about 600 submissions,** covering every case a teacher meets. See [`samples/README.md`](samples/README.md).
 
-## Demo logins
+## Try it: a 5-minute tour
 
-| Who | How to sign in | Where to look |
+Everything below works on the live site, **https://codingincolor.vercel.app**, with made-up demo data. No sign-up, email or approval needed.
+
+### 1. As a student (2 minutes)
+1. Open the site. Under **I'm a student**, type the class code **`PHX234`** and press **Join my class**.
+2. Tap a name. **Destiny J.** hasn't started yet; **Imani K.** is stuck on a coding step. Enter PIN **`1234`** on the number pad.
+   - Or press **I'm not on the list** to join as a new student: you'll get your own PIN, shown once.
+3. **My learning** shows your path: modules marked done, *up next*, *class is here*, *catch up* or locked, and your points gained since the pretest. Press **Continue**.
+4. Work through the steps: pretest → reading → quick check → **Python**. On a code step:
+   - **Run** shows what your program prints, next to the expected output.
+   - **Check my code** grades it and unlocks the next step when it passes.
+   - **Hint** gives a nudge, never the answer.
+   - Try an infinite loop (`while True: pass`): it's stopped after 6 seconds with a friendly message.
+
+### 2. As a judge or teacher (3 minutes)
+1. Press **Sign in** (top right). Under **Judges and reviewers**, press **Fill in the judge login**, then **Sign in**.
+2. Go to **Classes → Story Lab · Period 5**. This class has every case a teacher meets:
+   - **Today**, most urgent first: Ximena R. is **locked out** (press **Reset PIN**: the new PIN is shown once), then students who are **stuck** (press **See work** to read their code, answers and the hints they asked for), then students who **haven't started**.
+   - **Learning gain** per module: pretest vs post-test, counting only students who took both.
+   - **Roster** with CIC's four statuses (Not started / In progress / Complete / Stuck): filter it, see progress per module, or press **Place** to start a late joiner at a later module.
+   - **Class is on** sets the class pace. Late joiners start where the class is.
+3. Try the other classes: **AI Academy Spark** (`SPK7QR`, CIC's Data & AI and Story Generator modules) and the archived **Summer Bootcamp 2026**.
+
+## Demo access for judges: how it works
+
+| Who | How to sign in | Can do |
 |---|---|---|
-| **Judge (demo)** | `/signin.html` → **Fill in the judge login** → Sign in. `judge@demo.codingincolor.test` / `Newuserdemo`. No sign-up or approval needed | Sees every class; **Classes → Story Lab · Period 5** shows every case. No admin screens |
-| **Student** | Go to `/`, enter class code **`PHX234`**, tap a name, PIN **`1234`** | Try **Destiny J.** (not started) or **Imani K.** (stuck) |
-| **Instructor** | `/signin.html` as `instructor@demo.codingincolor.test`, password from `DEMO_STAFF_PASSWORD` | **Classes → Story Lab · Period 5** shows every case |
-| **CIC admin** | `/signin.html` as `admin@codingincolor.net`, password from `SEED_PASSWORD` | Sees every class, including the archived one |
+| **Judge (demo)** | **Sign in → Fill in the judge login** (`judge@demo.codingincolor.test` / `Newuserdemo`) | See every class, Today lists, learning gain, student work and the curriculum. Reset PINs and set the pace on the demo classes. **No admin areas**: can't manage staff, roles, settings or the audit log, or edit the curriculum. |
+| **Student** | Class code **`PHX234`** (or **`SPK7QR`**), any name, PIN **`1234`** | Everything a student can do |
+| **Demo instructor** | `instructor@demo.codingincolor.test`, password in `DEMO_STAFF_PASSWORD` (team only) | Their own 3 classes, like a real teacher |
+| **CIC admin** | `admin@codingincolor.net`, password in `SEED_PASSWORD` (team only) | Everything, including the archived class |
 
-Other class codes: **`SPK7QR`** (AI Academy, Data & AI and Story Generator), **`STR9KM`** (closed class: no self-join, one locked-out student). `SUM26X` is archived, so it can't be joined.
-
-> Demo access is switched on by `DEMO_JUDGE_PASSWORD` on the server and seeded by `npm run db:seed`. Unset it and the sign-in panel disappears. The judge account can't manage staff, roles or settings.
+- **Why no sign-up?** CIC creates staff accounts itself; there is no public sign-up to verify by email. Judges instead get a clearly labelled demo login with limited permissions, offered one click away on the sign-in page.
+- **How it's switched on:** the panel and the judge account exist only while **`DEMO_JUDGE_PASSWORD`** is set.
+  - On the server (Vercel), it turns on the panel through `GET /api/auth/demo`, which returns nothing when it isn't set.
+  - In `.env` for `npm run db:seed`, it creates the **Judge (demo)** role and the account (`db/demo-judge.js`).
+- **How to switch it off after judging:** remove `DEMO_JUDGE_PASSWORD` from Vercel and redeploy. The panel disappears. To remove the account too, delete the user `judge@demo.codingincolor.test`.
+- **It's demo data:** the schools, students and progress are made up (`db/demo-classes.js`, schools marked "(demo)"). Run `npm run db:seed` to add them to a fresh database. It's safe to run again.
 
 ## Run it locally
 
@@ -94,10 +121,12 @@ CI runs all three on every pull request against a throwaway Postgres, and fails 
 ## Deploy (Vercel + Neon)
 
 1. Import this repo in Vercel. The settings come from `vercel.json`: build `npm run build`, output `public`, and one serverless function at `api/index.js`.
-2. Set the environment variables: **`APP_DATABASE_URL`** (the restricted `cic_app` connection string). Don't give Vercel the owner `DATABASE_URL`.
+2. Set the environment variables: **`APP_DATABASE_URL`** (the restricted `cic_app` connection string), and optionally **`DEMO_JUDGE_PASSWORD`** for judge demo access. Don't give Vercel the owner `DATABASE_URL`.
 3. Run `npm run db:setup -- --reset` and `npm run db:seed` once from your machine against the same Neon database.
 
-Without the GitHub integration (it needs an organization owner), deploy from a laptop instead: `npx vercel link`, add `APP_DATABASE_URL` with `vercel env add`, then `npx vercel deploy --prod`. `.vercelignore` keeps `.env` and other local files out of the upload.
+The live site is connected to this repo, so **every merge to `main` deploys to production automatically**. After changing an environment variable, redeploy once (Vercel → Deployments → ⋯ → Redeploy) so it takes effect.
+
+Without the GitHub integration (it needs an organization owner to approve it), you can deploy from a laptop instead: `npx vercel link`, add variables with `vercel env add`, then `npx vercel deploy --prod`. `.vercelignore` keeps `.env` and other local files out of the upload.
 
 Running costs: Vercel Hobby and Neon Free cover a pilot. Nothing else is billed.
 
