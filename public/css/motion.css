@@ -1,0 +1,39 @@
+/* Subtle motion (see js/ui/motion.js). Only active with html.motion, which is
+   never set when the viewer prefers reduced motion. */
+
+/* Spotlight: a soft light under the pointer on glass cards. */
+.motion :is(.glass, .glass-strong:not(.glass-bar), .journey-card, .class-card, .today-item, .name-btn) {
+  background-image: radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px),
+    light-dark(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.06)), transparent 60%);
+}
+
+/* Reveal: cards fade up once as they come into view. */
+.motion .reveal { opacity: 0; transform: translateY(10px) scale(0.995); }
+.motion .reveal.is-in {
+  opacity: 1; transform: none;
+  transition: opacity 520ms var(--ease) var(--reveal-delay, 0ms), transform 620ms var(--ease) var(--reveal-delay, 0ms);
+}
+
+/* Blur in: each word of a heading sharpens into place. */
+.motion .blur-word {
+  display: inline-block;
+  animation: blur-in 700ms var(--ease) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+@keyframes blur-in {
+  from { opacity: 0; filter: blur(10px); transform: translateY(6px); }
+  to   { opacity: 1; filter: blur(0); transform: none; }
+}
+
+/* Shimmer on the primary button, once, so the main action is noticed. */
+.motion .btn-primary.btn-lg { position: relative; overflow: hidden; isolation: isolate; }
+.motion .btn-primary.btn-lg::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: shimmer 1.6s var(--ease) 0.9s 1 both;
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+
+/* Progress fills ease in rather than snapping. */
+.motion .ring .ring-value { transition-duration: 1100ms; }

@@ -6,6 +6,7 @@ import { html, render, initials } from './html.js';
 import { icon } from './icons.js';
 import { initToasts } from './components.js';
 import { openSettings } from './prefs.js';
+import { initMotion } from './motion.js';
 import { me, signOut, can } from './api.js';
 
 // Navigation for signed-in staff. `perm` hides items a role can't use; pages
@@ -66,6 +67,7 @@ function wireMenu(header) {
  */
 export async function renderShell({ current = location.pathname } = {}) {
   initToasts();
+  initMotion();
 
   // Draw the frame immediately so the page doesn't jump when sign-in state
   // arrives; the nav and user menu fill in once /api/auth/me answers.
