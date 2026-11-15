@@ -97,7 +97,7 @@ export async function renderShell({ current = location.pathname } = {}) {
   const orbs = document.createElement('div');
   orbs.className = 'bg-orbs';
   orbs.setAttribute('aria-hidden', 'true');
-  orbs.append(...Array.from({ length: 5 }, () => document.createElement('span')));
+  orbs.append(...Array.from({ length: 3 }, () => document.createElement('span')));
 
   document.body.prepend(skip, orbs, header);
   document.body.append(footer);

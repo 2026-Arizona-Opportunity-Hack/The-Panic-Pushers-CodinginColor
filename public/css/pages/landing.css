@@ -58,8 +58,5 @@
   .hero { grid-template-columns: 1fr; }
 }
 
-/* Each step gets its own pastel, with dark text for contrast. */
-.how-num { background: var(--accent-soft); color: var(--text); }
-.how-steps li:nth-child(2) .how-num { background: var(--lilac-soft); }
-.how-steps li:nth-child(3) .how-num { background: var(--sky-soft); }
-.how-steps li:nth-child(4) .how-num { background: var(--peach-soft); }
+/* Step numbers: a quiet green tint, so the page stays mostly white and grey. */
+.how-num { background: var(--accent-soft); color: var(--link); }
