@@ -18,10 +18,10 @@ try {
       <strong class="class-card-title">${c.name}</strong>
       <span class="muted text-sm">${c.cohort || ''}</span>
       <span class="class-card-meta">
-        <span>${icon('users')} ${c.students} students</span>
-        <span>${icon('book')} ${c.modules} modules</span>
+        <span>${icon('users')} ${c.students} ${c.students === 1 ? 'student' : 'students'}</span>
+        <span>${icon('book')} ${c.modules} ${c.modules === 1 ? 'module' : 'modules'}</span>
       </span>
-      ${c.pace_module ? html`<span class="class-card-pace">${icon('flag')} Class is on <strong>${c.pace_module}</strong></span>` : ''}
+      ${c.pace_module ? html`<span class="class-card-pace">${icon('flag')} <span class="nowrap">Class is on</span> <strong>${c.pace_module}</strong></span>` : ''}
     </a></li>`)}`
     : html`<li class="glass empty"><span class="empty-icon">${icon('users')}</span><p><strong>No classes yet.</strong></p><p class="muted">Classes assigned to you will show up here.</p></li>`);
 } catch (err) {

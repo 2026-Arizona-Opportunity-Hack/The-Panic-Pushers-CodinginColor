@@ -93,9 +93,9 @@ function draw() {
           <span class="gain-bar gain-pre"><span style-width="${g.avg_pre}"></span></span>
           <span class="gain-bar gain-post"><span style-width="${g.avg_post}"></span></span>
         </span>
-        <span class="gain-num"><span class="sr-only">Pretest average ${g.avg_pre}%, post-test average ${g.avg_post}%,</span>
-          <strong class="${g.avg_gain >= 0 ? 'gain-up' : 'gain-down'}">${g.avg_gain >= 0 ? '+' : ''}${g.avg_gain}</strong> pts
-          <span class="muted text-xs">${g.avg_pre}% → ${g.avg_post}%</span></span>` : html`<span></span><span class="muted text-sm">–</span>`}
+        <span class="gain-num"><span class="sr-only">Pretest average ${Math.round(g.avg_pre)}%, post-test average ${Math.round(g.avg_post)}%,</span>
+          <span class="gain-pts"><strong class="${g.avg_gain >= 0 ? 'gain-up' : 'gain-down'}">${g.avg_gain >= 0 ? '+' : ''}${Math.round(g.avg_gain)}</strong> pts</span>
+          <span class="muted text-xs gain-range">${Math.round(g.avg_pre)}% → ${Math.round(g.avg_post)}%</span></span>` : html`<span></span><span class="muted text-sm">–</span>`}
     </li>`;
   })}</ul><p class="muted text-xs gain-key"><span class="key key-pre"></span> Pretest <span class="key key-post"></span> Post-test</p>`);
   // CSP forbids inline styles, so bar widths are set through the CSSOM.
@@ -208,5 +208,7 @@ try {
   await load();
 } catch (err) {
   $('#class-title').textContent = "We can't open this class";
+  document.querySelector('.dash').hidden = true;
+  $('#roster-title').closest('section').hidden = true;
   render($('#stats'), html`<p class="callout callout-bad">${icon('x-circle')}<span>${err.message} <a href="/teach.html">Back to my classes</a></span></p>`);
 }
