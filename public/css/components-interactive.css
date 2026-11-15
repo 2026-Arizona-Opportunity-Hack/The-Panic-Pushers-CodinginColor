@@ -1,0 +1,113 @@
+/* CIC Glass: interactive components (dialogs, drawers, toasts, tabs, rings).
+ * Behaviour lives in /js/ui/components.js. */
+
+/* ---------- Modal and drawer: native <dialog> opened with showModal() ---------- */
+dialog.modal,
+dialog.drawer {
+  padding: 0;
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  background: var(--surface-solid);
+  box-shadow: var(--shadow-lg);
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+}
+dialog.modal {
+  width: min(520px, calc(100vw - 2rem));
+  border-radius: var(--radius-lg);
+  margin: auto;
+}
+dialog.drawer {
+  width: min(480px, 100vw);
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 0 0 auto;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+dialog::backdrop {
+  background: light-dark(rgba(6, 20, 13, 0.35), rgba(0, 0, 0, 0.6));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+dialog[open] { animation: dialog-in var(--dur) var(--ease); }
+dialog.drawer[open] { animation: drawer-in var(--dur) var(--ease); }
+@keyframes dialog-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+@keyframes drawer-in { from { transform: translateX(40px); opacity: 0; } }
+
+.dialog-head {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0;
+  background: var(--surface-solid);
+}
+.dialog-head h2 { font-size: var(--text-xl); }
+.dialog-body { padding: var(--space-5); }
+.dialog-foot {
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Toasts ---------- */
+.toasts {
+  position: fixed;
+  z-index: 200;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  left: var(--space-4);
+  display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2);
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  width: min(420px, 100%);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  background: var(--surface-solid);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--info);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  animation: toast-in var(--dur) var(--ease);
+}
+.toast > .icon { margin-top: 0.15em; color: var(--info); }
+.toast p { flex: 1; }
+.toast .btn-icon { width: 32px; min-height: 32px; margin: -0.2rem 0; }
+.toast-ok { border-left-color: var(--ok); }
+.toast-ok > .icon { color: var(--ok); }
+.toast-warn { border-left-color: var(--warn); }
+.toast-warn > .icon { color: var(--warn); }
+.toast-bad { border-left-color: var(--bad); }
+.toast-bad > .icon { color: var(--bad); }
+.toast.leaving { opacity: 0; transform: translateY(6px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---------- Tabs: [role=tablist] with [role=tab] buttons ---------- */
+.tablist {
+  display: flex; gap: var(--space-1);
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: none;
+}
+.tablist [role='tab'] {
+  flex: none;
+  min-height: var(--tap);
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  font-weight: 650;
+  cursor: pointer;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+.tablist [role='tab']:hover { color: var(--text); background: var(--accent-soft); }
+.tablist [role='tab'][aria-selected='true'] { color: var(--heading); border-bottom-color: var(--primary); }
+[role='tabpanel'] { padding-top: var(--space-4); }
+
+/* ---------- Progress ring (SVG built by progressRing()) ---------- */
+.ring { display: inline-block; flex: none; }
+.ring .ring-track { stroke: var(--surface-sunken); }
+.ring .ring-value { stroke: var(--accent); transition: stroke-dashoffset 600ms var(--ease); }
+.ring text { fill: var(--text); font-family: var(--font-sans); font-weight: 800; }
