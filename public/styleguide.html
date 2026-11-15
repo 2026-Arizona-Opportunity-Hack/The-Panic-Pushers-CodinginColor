@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style guide · CIC Classroom</title>
+  <meta name="description" content="Every CIC Classroom component in light, dark and high contrast.">
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/glass.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages/styleguide.css">
+  <script type="module" src="/js/pages/styleguide.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="glass-bar sg-bar">
+    <div class="container spread">
+      <p class="sg-brand"><strong>CIC Classroom</strong> <span class="muted">style guide</span></p>
+      <div class="cluster">
+        <fieldset class="segmented" id="theme">
+          <legend>Theme</legend>
+          <label><input type="radio" name="theme" value="system" checked><span>System</span></label>
+          <label><input type="radio" name="theme" value="light"><span data-icon="sun">Light</span></label>
+          <label><input type="radio" name="theme" value="dark"><span data-icon="moon">Dark</span></label>
+        </fieldset>
+        <label class="check"><input type="checkbox" role="switch" class="switch" id="contrast"> High contrast</label>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container sg-main stack">
+    <div>
+      <p class="eyebrow">Design system</p>
+      <h1>CIC Glass</h1>
+      <p class="muted">Brand colors from the Coding in Color guidelines. Every text color is checked for WCAG AA contrast by <code>npm run check:contrast</code>.</p>
+    </div>
+
+    <section class="glass card stack" aria-labelledby="h-buttons">
+      <h2 id="h-buttons">Buttons</h2>
+      <div class="cluster">
+        <button class="btn btn-primary" type="button">Start module <span data-icon="arrow-right"></span></button>
+        <button class="btn btn-secondary" type="button"><span data-icon="lightbulb"></span> Get a hint</button>
+        <button class="btn btn-ghost" type="button">Skip for now</button>
+        <button class="btn btn-danger" type="button"><span data-icon="trash"></span> Remove student</button>
+        <button class="btn btn-primary" type="button" aria-busy="true">Saving</button>
+        <button class="btn btn-secondary" type="button" disabled>Locked</button>
+        <button class="btn btn-secondary btn-icon" type="button" data-icon-label="Edit class" data-icon="edit"></button>
+      </div>
+      <div class="cluster">
+        <button class="btn btn-primary btn-sm" type="button">Small</button>
+        <button class="btn btn-primary btn-lg" type="button">Large</button>
+      </div>
+    </section>
+
+    <section class="glass card stack" aria-labelledby="h-forms">
+      <h2 id="h-forms">Forms</h2>
+      <div class="grid-auto">
+        <div class="field">
+          <label for="sg-class">Class name</label>
+          <input class="input" id="sg-class" placeholder="Maryvale AI Academy" aria-describedby="sg-class-hint">
+          <p class="hint" id="sg-class-hint">Students see this when they join.</p>
+        </div>
+        <div class="field">
+          <label for="sg-email">Email</label>
+          <input class="input" id="sg-email" type="email" value="diana@" aria-invalid="true" aria-describedby="sg-email-err">
+          <p class="field-error" id="sg-email-err"><span data-icon="alert"></span>Email is not a valid email address</p>
+        </div>
+        <div class="field">
+          <label for="sg-school">School</label>
+          <select class="select" id="sg-school"><option>Maryvale High School</option><option>Desert Edge High School</option><option>Salt River Schools</option></select>
+        </div>
+        <div class="field">
+          <label for="sg-code">Class code</label>
+          <input class="input input-code" id="sg-code" value="K7M2QP" maxlength="6" autocomplete="off">
+        </div>
+      </div>
+      <div class="field">
+        <label for="sg-exit">Exit question: what does a loop save you from doing?</label>
+        <textarea class="textarea" id="sg-exit" placeholder="Type your answer"></textarea>
+      </div>
+      <div class="cluster">
+        <label class="check"><input type="checkbox" checked> Let late joiners add themselves</label>
+        <label class="check"><input type="checkbox" role="switch" class="switch" checked> AI hints on</label>
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="h-cards">
+      <h2 id="h-cards">Cards and stats</h2>
+      <div class="grid-auto">
+        <div class="glass card stat"><span class="stat-label">Learning gain on loops</span><span class="stat-value">+32 pts</span><span class="stat-delta up"><span data-icon="arrow-up"></span> normalized gain 0.54</span></div>
+        <div class="glass card stat"><span class="stat-label">Module completion</span><span class="stat-value">78%</span><progress class="progress" value="78" max="100" aria-label="Module completion 78%">78%</progress></div>
+        <div class="glass card stat"><span class="stat-label">Students stuck</span><span class="stat-value">3</span><span class="stat-delta down"><span data-icon="arrow-down"></span> 2 more than yesterday</span></div>
+      </div>
+    </section>
+
+    <section class="glass card stack" aria-labelledby="h-badges">
+      <h2 id="h-badges">Badges, avatars and callouts</h2>
+      <div class="cluster">
+        <span class="badge badge-ok"><span data-icon="check"></span> Completed</span>
+        <span class="badge badge-warn"><span data-icon="clock"></span> Stuck 12 min</span>
+        <span class="badge badge-bad"><span data-icon="x"></span> Not started</span>
+        <span class="badge badge-info"><span data-icon="lightbulb"></span> 2 hints</span>
+        <span class="badge">Draft</span>
+        <span class="avatar" aria-hidden="true">MG</span>
+        <span class="avatar avatar-sm" aria-hidden="true">DS</span>
+      </div>
+      <div class="callout callout-ok"><span data-icon="check-circle"></span><p><strong>All checks passed.</strong> Module 3 is unlocked.</p></div>
+      <div class="callout callout-warn"><span data-icon="alert"></span><p><strong>68% of the class asked for help on loops.</strong> Consider reteaching it tomorrow.</p></div>
+      <div class="callout callout-bad"><span data-icon="x-circle"></span><p>Your output doesn't match yet. Compare line 3 with the expected output.</p></div>
+      <div class="callout"><span data-icon="info"></span><p>Students join with a class code and a 4-digit PIN. No email needed.</p></div>
+    </section>
+
+    <section class="grid-auto sg-two" aria-label="Stepper and empty state">
+      <div class="glass card stack">
+        <h2>Stepper</h2>
+        <ol class="stepper" aria-label="Module steps">
+          <li><a href="#main" data-state="done">Pretest</a></li>
+          <li><a href="#main" data-state="done">Watch: loops</a></li>
+          <li><a href="#main" aria-current="step">Check your understanding</a></li>
+          <li><span class="step" data-state="locked">Practice in Python</span></li>
+          <li><span class="step" data-state="locked">Exit ticket</span></li>
+          <li><span class="step" data-state="locked">Post-test</span></li>
+        </ol>
+      </div>
+      <div class="glass card">
+        <div class="empty">
+          <span class="empty-icon" data-icon="users"></span>
+          <h2>No students yet</h2>
+          <p>Share the class code or import a roster CSV. Students appear here as they join.</p>
+          <button class="btn btn-primary" type="button"><span data-icon="upload"></span> Import roster</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="glass-strong card stack" aria-labelledby="h-table">
+      <h2 id="h-table">Table</h2>
+      <div class="table-wrap">
+        <table class="table stack-sm-cards">
+          <caption class="sr-only">Students in Maryvale AI Academy</caption>
+          <thead><tr><th scope="col">Student</th><th scope="col">Current module</th><th scope="col">Status</th><th scope="col" class="num">Pretest</th><th scope="col" class="num">Post-test</th><th scope="col" class="num">Gain</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Student">Aaliyah M.</td><td data-label="Current module">3 · Lists</td><td data-label="Status"><span class="badge badge-ok">On track</span></td><td data-label="Pretest" class="num">40%</td><td data-label="Post-test" class="num">90%</td><td data-label="Gain" class="num">+50</td></tr>
+            <tr><td data-label="Student">Camila R.</td><td data-label="Current module">2 · Loops</td><td data-label="Status"><span class="badge badge-warn">Stuck</span></td><td data-label="Pretest" class="num">20%</td><td data-label="Post-test" class="num">n/a</td><td data-label="Gain" class="num">n/a</td></tr>
+            <tr><td data-label="Student">Diego S.</td><td data-label="Current module">2 · Loops</td><td data-label="Status"><span class="badge badge-ok">On track</span></td><td data-label="Pretest" class="num">60%</td><td data-label="Post-test" class="num">80%</td><td data-label="Gain" class="num">+20</td></tr>
+            <tr><td data-label="Student">Isaiah J.</td><td data-label="Current module">1 · Printing</td><td data-label="Status"><span class="badge badge-bad">Not started</span></td><td data-label="Pretest" class="num">n/a</td><td data-label="Post-test" class="num">n/a</td><td data-label="Gain" class="num">n/a</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="glass card stack" aria-labelledby="h-loading">
+      <h2 id="h-loading">Loading</h2>
+      <div class="stack-sm" aria-hidden="true">
+        <span class="skeleton sg-skel-1"></span>
+        <span class="skeleton sg-skel-2"></span>
+        <span class="skeleton sg-skel-3"></span>
+      </div>
+      <pre><code>for i in range(1, 6):
+    print(i)</code></pre>
+    </section>
+
+    <section class="glass card stack" aria-labelledby="h-icons">
+      <h2 id="h-icons">Icons</h2>
+      <ul class="sg-icons" id="icon-list"></ul>
+    </section>
+  </main>
+</body>
+</html>
