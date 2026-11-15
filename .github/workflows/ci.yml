@@ -55,7 +55,7 @@ jobs:
       - name: Run tests as the restricted app role
         shell: bash
         run: |
-          node --test --test-reporter=tap test/ 2>&1 | tee test-output.txt
+          node --test --test-reporter=tap 'test/*.test.js' 2>&1 | tee test-output.txt
           # A missing database variable would skip the database tests and
           # still pass, so fail unless every test actually ran.
           grep -q '^# skipped 0$' test-output.txt || { echo "::error::Some tests were skipped"; exit 1; }
