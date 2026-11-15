@@ -21,31 +21,32 @@ body {
   overflow-x: hidden;
 }
 
-/* ---- Aurora background: soft brand-green light behind the glass ---- */
-body::before {
-  content: '';
-  position: fixed;
-  inset: -20vmax;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(40vmax 34vmax at 12% 18%, var(--aurora-1), transparent 70%),
-    radial-gradient(36vmax 30vmax at 88% 12%, var(--aurora-2), transparent 70%),
-    radial-gradient(30vmax 26vmax at 78% 82%, var(--aurora-3), transparent 70%),
-    radial-gradient(42vmax 36vmax at 20% 88%, var(--aurora-4), transparent 70%);
-  animation: aurora-drift 38s var(--ease) infinite alternate;
+/* ---- Background: soft orbs of light drifting behind the glass ----
+   The shell adds <div class="bg-orbs" aria-hidden="true"> with three spans:
+   a light green tint, nothing louder (the brand guide asks for white space).
+   Only transform and opacity animate, so it stays smooth on Chromebooks. */
+.bg-orbs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bg-orbs span {
+  position: absolute;
+  width: 46vmax; height: 46vmax;
+  border-radius: 50%;
+  filter: blur(64px);
+  will-change: transform;
+  animation: orb-a 26s ease-in-out infinite alternate;
 }
-@keyframes aurora-drift {
-  from { transform: translate3d(0, 0, 0) rotate(0deg); }
-  to   { transform: translate3d(3vmax, -2vmax, 0) rotate(6deg); }
-}
+.bg-orbs span:nth-child(1) { background: var(--orb-1); left: -12vmax; top: -14vmax; }
+.bg-orbs span:nth-child(2) { background: var(--orb-2); right: -14vmax; top: 8vh; width: 40vmax; height: 40vmax; animation-name: orb-b; animation-duration: 31s; }
+.bg-orbs span:nth-child(3) { background: var(--orb-3); left: 28vw; bottom: -20vmax; width: 44vmax; height: 44vmax; animation-name: orb-c; animation-duration: 35s; }
+@keyframes orb-a { 0% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(12vw, 8vh, 0) scale(1.12); } 100% { transform: translate3d(4vw, 18vh, 0) scale(0.94); } }
+@keyframes orb-b { 0% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-10vw, 12vh, 0) scale(0.9); } 100% { transform: translate3d(-4vw, -6vh, 0) scale(1.1); } }
+@keyframes orb-c { 0% { transform: translate3d(0, 0, 0) scale(1.05); } 50% { transform: translate3d(-14vw, -10vh, 0) scale(0.95); } 100% { transform: translate3d(10vw, -4vh, 0) scale(1.08); } }
 
 /* ---- Typography ---- */
 h1, h2, h3, h4 {
   color: var(--heading);
-  font-weight: 750;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 h1 { font-size: var(--text-3xl); }
@@ -86,7 +87,7 @@ pre code { background: none; padding: 0; }
 img, svg, video, canvas { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; color: inherit; }
 hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-5) 0; }
-::selection { background: rgba(255, 183, 3, 0.45); color: var(--text); }
+::selection { background: light-dark(#CDEFDC, rgba(60, 203, 130, 0.35)); color: var(--text); }
 
 /* ---- Focus: always visible, never color-only ---- */
 :focus { outline: none; }

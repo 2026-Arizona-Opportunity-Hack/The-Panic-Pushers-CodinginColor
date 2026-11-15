@@ -5,6 +5,7 @@ import { icon } from '../ui/icons.js';
 import { renderShell } from '../ui/shell.js';
 import { progressRing } from '../ui/components.js';
 import { api, requireStudent } from '../ui/api.js';
+import { blurIn } from '../ui/motion.js';
 
 await renderShell();
 await requireStudent();
@@ -52,6 +53,7 @@ try {
 
   $('#learn-class').textContent = data.class.name;
   $('#learn-title').textContent = `Hi, ${data.student.display_name}`;
+  blurIn($('#learn-title'));
   render($('#learn-sub'), html`<span class="${badgeClass}">${badgeText}</span> ${s.done} of ${s.total} steps done across ${data.modules.length} modules.`);
   render($('#learn-cta'), start
     ? html`<a class="btn btn-primary btn-lg" href="/module.html?id=${start.id}">${s.done ? 'Continue' : 'Start'}: ${start.title} ${icon('arrow-right')}</a>`

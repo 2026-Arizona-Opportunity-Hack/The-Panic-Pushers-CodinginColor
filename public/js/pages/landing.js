@@ -4,9 +4,11 @@ import { fillIcons } from '../ui/icons.js';
 import { renderShell } from '../ui/shell.js';
 import { setBusy, showFieldErrors, clearFieldErrors, toast } from '../ui/components.js';
 import { api } from '../ui/api.js';
+import { blurIn } from '../ui/motion.js';
 
 fillIcons();
 renderShell();
+blurIn($('#hero-title'));
 
 const form = $('#join-form');
 const input = $('#class-code');

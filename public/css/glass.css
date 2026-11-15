@@ -12,18 +12,47 @@
 .glass,
 .glass-strong,
 .glass-bar {
-  background: var(--surface);
+  background: var(--glass-fill);
   border: 1px solid var(--glass-border);
   box-shadow: inset 0 1px 0 var(--glass-highlight), var(--shadow);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(190%);
 }
 
 .glass { border-radius: var(--radius-lg); }
-.glass-strong { background: var(--surface-strong); border-radius: var(--radius-lg); }
+.glass-strong { background: var(--glass-fill-strong); border-radius: var(--radius-lg); }
+
+/* Light-catching edge: bright at the top-left, fading away, like real glass.
+   :where() keeps specificity at zero so a page's own position (sticky) wins. */
+:where(.glass, .glass-strong) { position: relative; }
+.glass::after, .glass-strong::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(150deg, var(--glass-edge-hi), var(--glass-edge-lo) 38%, var(--glass-edge-lo) 62%, var(--glass-edge-hi));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity var(--dur) var(--ease);
+}
+
+/* Cards you can click lift a little and their edge brightens. */
+a.glass, a.glass-strong, button.glass, .glass.interactive, .glass-strong.interactive {
+  transition: transform 320ms var(--ease), box-shadow 320ms var(--ease), border-color 320ms var(--ease);
+}
+a.glass:hover, a.glass-strong:hover, button.glass:hover, .glass.interactive:hover, .glass-strong.interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 1px 0 var(--glass-highlight), var(--shadow-lg);
+}
+a.glass:hover::after, a.glass-strong:hover::after, button.glass:hover::after { opacity: 1; }
 
 .glass-bar {
   background: var(--surface-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(190%);
   border-width: 0 0 1px;
   border-radius: 0;
   box-shadow: inset 0 -1px 0 var(--line);

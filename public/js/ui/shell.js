@@ -6,6 +6,7 @@ import { html, render, initials } from './html.js';
 import { icon } from './icons.js';
 import { initToasts } from './components.js';
 import { openSettings } from './prefs.js';
+import { initMotion } from './motion.js';
 import { me, signOut, can } from './api.js';
 
 // Navigation for signed-in staff. `perm` hides items a role can't use; pages
@@ -66,6 +67,7 @@ function wireMenu(header) {
  */
 export async function renderShell({ current = location.pathname } = {}) {
   initToasts();
+  initMotion();
 
   // Draw the frame immediately so the page doesn't jump when sign-in state
   // arrives; the nav and user menu fill in once /api/auth/me answers.
@@ -92,7 +94,12 @@ export async function renderShell({ current = location.pathname } = {}) {
     <p class="cluster"><button class="btn btn-ghost btn-sm" type="button" data-settings>${icon('sliders')} Display settings</button></p>
   </div>`);
 
-  document.body.prepend(skip, header);
+  const orbs = document.createElement('div');
+  orbs.className = 'bg-orbs';
+  orbs.setAttribute('aria-hidden', 'true');
+  orbs.append(...Array.from({ length: 3 }, () => document.createElement('span')));
+
+  document.body.prepend(skip, orbs, header);
   document.body.append(footer);
   for (const b of document.querySelectorAll('[data-settings]')) b.addEventListener('click', openSettings);
 
