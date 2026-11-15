@@ -1,0 +1,21 @@
+# Files the Vercel CLI must never upload when deploying from a laptop.
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Local tooling and history
+.git
+.claude
+.vscode
+.idea
+.DS_Store
+*.log
+# Rebuilt on Vercel by `npm run build`
+node_modules
+public/pyodide
+# Not needed to run the site
+test
+samples
+docs
