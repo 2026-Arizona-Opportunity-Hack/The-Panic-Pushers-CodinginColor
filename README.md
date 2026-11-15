@@ -6,7 +6,7 @@ Built by **The Panic Pushers** at [ASU Fall Hackathon 2026 | Phoenix Hackathon f
 
 | | |
 |---|---|
-| **Live demo** | _Vercel link goes here_ |
+| **Live demo** | **https://codingincolor.vercel.app** |
 | **Demo video** | _video link goes here_ |
 | **Try it** | Class code **`PHX234`**, any name, PIN **`1234`** (see [Demo logins](#demo-logins)) |
 
@@ -58,7 +58,7 @@ Coding in Color teaches Arizona high school students (ages 14 to 18) in partner 
 
 | Who | How to sign in | Where to look |
 |---|---|---|
-| **Student** | Go to `/`, enter class code **`PHX234`**, tap a name, PIN **`1234`** | Try **Destiny J.** (not started) or **Camila R.** (stuck) |
+| **Student** | Go to `/`, enter class code **`PHX234`**, tap a name, PIN **`1234`** | Try **Destiny J.** (not started) or **Imani K.** (stuck) |
 | **Instructor** | `/signin.html` as `instructor@demo.codingincolor.test`, password from `DEMO_STAFF_PASSWORD` | **Classes → Story Lab · Period 5** shows every case |
 | **CIC admin** | `/signin.html` as `admin@codingincolor.net`, password from `SEED_PASSWORD` | Sees every class, including the archived one |
 
@@ -95,6 +95,8 @@ CI runs all three on every pull request against a throwaway Postgres, and fails 
 1. Import this repo in Vercel. The settings come from `vercel.json`: build `npm run build`, output `public`, and one serverless function at `api/index.js`.
 2. Set the environment variables: **`APP_DATABASE_URL`** (the restricted `cic_app` connection string). Don't give Vercel the owner `DATABASE_URL`.
 3. Run `npm run db:setup -- --reset` and `npm run db:seed` once from your machine against the same Neon database.
+
+Without the GitHub integration (it needs an organization owner), deploy from a laptop instead: `npx vercel link`, add `APP_DATABASE_URL` with `vercel env add`, then `npx vercel deploy --prod`. `.vercelignore` keeps `.env` and other local files out of the upload.
 
 Running costs: Vercel Hobby and Neon Free cover a pilot. Nothing else is billed.
 
