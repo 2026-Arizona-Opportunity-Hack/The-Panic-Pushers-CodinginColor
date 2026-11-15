@@ -12,6 +12,7 @@ import { me, signOut, can } from './api.js';
 // add themselves here as they are built.
 const NAV = [
   { href: '/home.html', label: 'Home', icon: 'home' },
+  { href: '/teach.html', label: 'Classes', icon: 'users', perm: ['classes.manage_own', 'classes.manage_all'], also: ['/class.html'] },
 ];
 
 const brandMark = html`<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
@@ -96,13 +97,13 @@ export async function renderShell({ current = location.pathname } = {}) {
   for (const b of document.querySelectorAll('[data-settings]')) b.addEventListener('click', openSettings);
 
   const who = await me().catch(() => ({ kind: null }));
-  const items = who.kind === 'staff' ? NAV.filter((n) => !n.perm || can(who, n.perm)) : [];
+  const items = who.kind === 'staff' ? NAV.filter((n) => !n.perm || [].concat(n.perm).some((p) => can(who, p))) : [];
   if (who.kind) header.querySelector('.brand').href = who.kind === 'staff' ? '/home.html' : '/learn.html';
   if (items.length) {
     const nav = document.createElement('nav');
     nav.className = 'app-nav';
     nav.setAttribute('aria-label', 'Main');
-    render(nav, html`<ul>${items.map((n) => html`<li><a href="${n.href}" ${n.href === current ? html`aria-current="page"` : ''}>${icon(n.icon)}<span>${n.label}</span></a></li>`)}</ul>`);
+    render(nav, html`<ul>${items.map((n) => html`<li><a href="${n.href}" ${n.href === current || n.also?.includes(current) ? html`aria-current="page"` : ''}>${icon(n.icon)}<span>${n.label}</span></a></li>`)}</ul>`);
     header.querySelector('[data-nav]').replaceWith(nav);
   }
   render(header.querySelector('[data-user]'), userMenu(who));

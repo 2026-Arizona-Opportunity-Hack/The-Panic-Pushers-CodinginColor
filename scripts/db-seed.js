@@ -132,7 +132,23 @@ async function addProgress(q, classId, studentIds, stories, cls, moduleActs) {
   return rows.length;
 }
 
-async function addClasses(q, added, skipped) {
+// A demo instructor who teaches the demo classes, so the instructor view can be
+// tried without the admin account. Only created when DEMO_STAFF_PASSWORD is set.
+const DEMO_INSTRUCTOR = { email: 'instructor@demo.codingincolor.test', name: 'Jordan Rivera (demo)' };
+
+async function addInstructor(q, added) {
+  const password = process.env.DEMO_STAFF_PASSWORD;
+  if (!password) return null;
+  const existing = await q.one('select id from users where email = $1', [DEMO_INSTRUCTOR.email]);
+  if (existing) return existing.id;
+  const role = await q.one("select id from roles where key = 'instructor'");
+  const u = await q.one('insert into users (email, name, role_id, password_hash) values ($1, $2, $3, $4) returning id',
+    [DEMO_INSTRUCTOR.email, DEMO_INSTRUCTOR.name, role.id, await hashSecret(password)]);
+  added.push(`instructor ${DEMO_INSTRUCTOR.email}`);
+  return u.id;
+}
+
+async function addClasses(q, added, skipped, instructorId) {
   const pinHash = await hashSecret(demoPin);
   for (const c of demoClasses) {
     let cls = await q.one('select id from classes where join_code = $1', [c.join_code]);
@@ -153,6 +169,7 @@ async function addClasses(q, added, skipped) {
     } else {
       skipped.push(`class ${c.join_code}`);
     }
+    if (instructorId && !c.archived) await q('update classes set instructor_id = coalesce(instructor_id, $2) where id = $1', [cls.id, instructorId]);
 
     const has = await q.one('select count(*)::int as n from submissions s join students st on st.id = s.student_id where st.class_id = $1', [cls.id]);
     if (has.n) continue;
@@ -173,7 +190,7 @@ const summary = await asSystem(async (q) => {
   const added = [];
   const skipped = [];
   await addModules(q, admin, added, skipped);
-  await addClasses(q, added, skipped);
+  await addClasses(q, added, skipped, await addInstructor(q, added));
   return { added, skipped };
 }, pool);
 

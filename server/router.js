@@ -12,6 +12,7 @@ import { HttpError, readJsonBody, send, sendError, forbidden, unauthorized } fro
 import authRoutes from './routes/auth.js';
 import curriculumRoutes from './routes/curriculum.js';
 import studentRoutes from './routes/student.js';
+import classRoutes from './routes/classes.js';
 
 // Vercel rewrites /api/<path> to /api/index?__path=<path>; locally we get the raw URL.
 export function apiPath(req) {
@@ -129,4 +130,4 @@ export function createRouter(registers) {
   };
 }
 
-export const handle = createRouter([healthRoutes, authRoutes, curriculumRoutes, studentRoutes]);
+export const handle = createRouter([healthRoutes, authRoutes, curriculumRoutes, studentRoutes, classRoutes]);
