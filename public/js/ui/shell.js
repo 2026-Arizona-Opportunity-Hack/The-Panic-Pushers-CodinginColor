@@ -22,7 +22,7 @@ const brandMark = html`<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="
 
 function userMenu(who) {
   if (who.kind !== 'staff') {
-    return html`<a class="btn btn-primary btn-sm" href="/signin.html">Sign in</a>`;
+    return location.pathname === '/signin.html' ? '' : html`<a class="btn btn-primary btn-sm" href="/signin.html">Sign in</a>`;
   }
   const { name, role_name } = who.user;
   return html`<div class="menu">
@@ -62,10 +62,9 @@ function wireMenu(header) {
  */
 export async function renderShell({ current = location.pathname } = {}) {
   initToasts();
-  const who = await me().catch(() => ({ kind: null }));
-  const items = who.kind === 'staff' ? NAV.filter((n) => !n.perm || can(who, n.perm)) : [];
-  const home = who.kind === 'staff' ? '/home.html' : '/';
 
+  // Draw the frame immediately so the page doesn't jump when sign-in state
+  // arrives; the nav and user menu fill in once /api/auth/me answers.
   const skip = document.createElement('a');
   skip.className = 'skip-link';
   skip.href = '#main';
@@ -74,11 +73,11 @@ export async function renderShell({ current = location.pathname } = {}) {
   const header = document.createElement('header');
   header.className = 'glass-bar app-bar';
   render(header, html`<div class="container app-bar-inner">
-    <a class="brand" href="${home}">${brandMark}<span class="brand-text"><strong>CIC Classroom</strong><span>Coding in Color</span></span></a>
-    ${items.length ? html`<nav class="app-nav" aria-label="Main"><ul>${items.map((n) => html`<li><a href="${n.href}" ${n.href === current ? html`aria-current="page"` : ''}>${icon(n.icon)}<span>${n.label}</span></a></li>`)}</ul></nav>` : html`<span class="app-nav-spacer"></span>`}
+    <a class="brand" href="/">${brandMark}<span class="brand-text"><strong>CIC Classroom</strong><span>Coding in Color</span></span></a>
+    <span class="app-nav-spacer" data-nav></span>
     <div class="app-actions">
       <button class="btn btn-ghost btn-icon" type="button" data-settings>${icon('sliders', { label: 'Display settings' })}</button>
-      ${userMenu(who)}
+      <span class="app-user" data-user></span>
     </div>
   </div>`);
 
@@ -92,6 +91,18 @@ export async function renderShell({ current = location.pathname } = {}) {
   document.body.prepend(skip, header);
   document.body.append(footer);
   for (const b of document.querySelectorAll('[data-settings]')) b.addEventListener('click', openSettings);
+
+  const who = await me().catch(() => ({ kind: null }));
+  const items = who.kind === 'staff' ? NAV.filter((n) => !n.perm || can(who, n.perm)) : [];
+  if (who.kind === 'staff') header.querySelector('.brand').href = '/home.html';
+  if (items.length) {
+    const nav = document.createElement('nav');
+    nav.className = 'app-nav';
+    nav.setAttribute('aria-label', 'Main');
+    render(nav, html`<ul>${items.map((n) => html`<li><a href="${n.href}" ${n.href === current ? html`aria-current="page"` : ''}>${icon(n.icon)}<span>${n.label}</span></a></li>`)}</ul>`);
+    header.querySelector('[data-nav]').replaceWith(nav);
+  }
+  render(header.querySelector('[data-user]'), userMenu(who));
   wireMenu(header);
   return who;
 }
