@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module · CIC Classroom</title>
+  <meta name="description" content="Work through a module one step at a time.">
+  <meta name="theme-color" content="#007A3D">
+  <script src="/js/boot.js"></script>
+  <link rel="preload" href="/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/glass.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/components-interactive.css">
+  <link rel="stylesheet" href="/css/shell.css">
+  <link rel="stylesheet" href="/css/pages/module.css">
+  <script type="module" src="/js/pages/module.js"></script>
+</head>
+<body>
+  <main id="main" class="container player-page" tabindex="-1">
+    <nav class="player-crumbs" aria-label="Breadcrumb"><a href="/learn.html" class="btn btn-ghost btn-sm"><span data-icon="chevron-left"></span> My learning</a></nav>
+    <header class="player-head">
+      <h1 id="module-title">Loading…</h1>
+      <div class="player-progress"><progress class="progress" id="module-progress" max="1" value="0" aria-label="Module progress"></progress><span class="muted text-sm" id="module-count"></span></div>
+    </header>
+    <div class="player">
+      <nav class="glass player-rail" aria-label="Steps in this module"><ol id="steps"></ol></nav>
+      <section class="glass-strong player-pane" id="pane" aria-labelledby="step-title" aria-live="off"></section>
+    </div>
+  </main>
+</body>
+</html>
